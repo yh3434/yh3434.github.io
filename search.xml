@@ -151,15 +151,6 @@
 </code></pre>]]></content>
     </entry>
     
-    <entry>
-      <title><![CDATA[我的博客上线啦]]></title>
-      <url>http://yuhang.tech/2016/10/16/first/</url>
-      <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>  我的博客上线啦！</p>
-<h1 id="中间"><a href="#中间" class="headerlink" title="中间"></a>中间</h1><p>  告别了两年没变的编程方式，换了工作，换了城市，换了mac,换了intellJ ieda,换了maven，换了git，告别了tomcat。<br>  准备好好写博客啦！朝着全栈工程师努力！</p>
-<h1 id="后面"><a href="#后面" class="headerlink" title="后面"></a>后面</h1><p>  准备把两年前实习时写的一整套的微信公众平台重新开发，并且开源出来，会用到新的vertx.x技术，准备把servlet+mysql去掉，换成vert.x和mongodb+redis，欢迎关注。    </p>
-]]></content>
-    </entry>
-    
   
   
 </search>
