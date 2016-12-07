@@ -4,6 +4,21 @@
   
     
     <entry>
+      <title><![CDATA[一个小目标]]></title>
+      <url>http://yuhang.tech/2016/12/07/2016-12-7-summary-1/</url>
+      <content type="html"><![CDATA[<h1 id="说点啥"><a href="#说点啥" class="headerlink" title="说点啥"></a>说点啥</h1><p>工作越来越忙，工作和学习似乎是要打着架抢时间呢。接触的越多，发现不懂得越多，心里慌慌的，有时忽然感觉自己啥也不会，离大成之日还剩十万八千里。怎么走完这十万八千里呢？当然还是得学习。怎么处理好工作和学习呢？我觉得就是~~~</p>
+<p>就是定一个小目标并且完成它。</p>
+<p>接下来的小目标是：</p>
+<ul>
+<li>12月11号以前完成IO和NIO的总结~</li>
+<li>12月14号以前完成Vert.x蓝图系列的搭建与理解~</li>
+<li>12月24号以前完成对Vert.x源码的第一次初步学习，理解核心思想~</li>
+</ul>
+<p>好了，就这么多吧。路还很长，慢慢走吧，不要慌。只能这么安慰自己了。    </p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[java基础-ServiceLoader]]></title>
       <url>http://yuhang.tech/2016/12/05/2016-12-5-javabase-serviceLoader/</url>
       <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​    今天在看Vert.x源码的时候，一直没找到创建vertx对象时在哪走的实现类的构造方法。后来深入进去看到一些ServiceLoader的东西，查阅资料才知道，这是一种类似Spring依赖注入的类的初始化方式，在很多知名框架都用到，对于阅读源码还是很有帮助作用的。比如:Hadoop。</p>

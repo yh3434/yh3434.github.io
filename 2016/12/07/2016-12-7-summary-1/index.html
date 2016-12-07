@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java基础," />
+  <meta name="keywords" content="心情感悟," />
 
 
 
@@ -84,19 +84,34 @@
 
 
 
-<meta name="description" content="前言​        今天继续学习多线程，本来volatile关键字应该很好理解，不需要单独写博客记录。但是今天碰到些我暂时不能解释的问题，固贴出来交流一下。
-volatile​        根据JMM，Java中有一块主内存，不同的线程有自己的工作内存，同一个变量值在主内存中有一份，如果线程用到了这个变量的话，自己的工作内存中有一份一模一样的拷贝。每次进入线程从主内存中拿到变量值，每次执行完线">
+<meta name="description" content="说点啥工作越来越忙，工作和学习似乎是要打着架抢时间呢。接触的越多，发现不懂得越多，心里慌慌的，有时忽然感觉自己啥也不会，离大成之日还剩十万八千里。怎么走完这十万八千里呢？当然还是得学习。怎么处理好工作和学习呢？我觉得就是~~~
+就是定一个小目标并且完成它。
+接下来的小目标是：
+
+12月11号以前完成IO和NIO的总结~
+12月14号以前完成Vert.x蓝图系列的搭建与理解~
+12月24号以前完成对">
 <meta property="og:type" content="article">
-<meta property="og:title" content="多线程学习—2-volatile的使用">
-<meta property="og:url" content="http://yuhang.tech/2016/12/01/multiThread2/index.html">
+<meta property="og:title" content="一个小目标">
+<meta property="og:url" content="http://yuhang.tech/2016/12/07/2016-12-7-summary-1/index.html">
 <meta property="og:site_name" content="大眼技术">
-<meta property="og:description" content="前言​        今天继续学习多线程，本来volatile关键字应该很好理解，不需要单独写博客记录。但是今天碰到些我暂时不能解释的问题，固贴出来交流一下。
-volatile​        根据JMM，Java中有一块主内存，不同的线程有自己的工作内存，同一个变量值在主内存中有一份，如果线程用到了这个变量的话，自己的工作内存中有一份一模一样的拷贝。每次进入线程从主内存中拿到变量值，每次执行完线">
-<meta property="og:updated_time" content="2016-12-04T15:03:28.000Z">
+<meta property="og:description" content="说点啥工作越来越忙，工作和学习似乎是要打着架抢时间呢。接触的越多，发现不懂得越多，心里慌慌的，有时忽然感觉自己啥也不会，离大成之日还剩十万八千里。怎么走完这十万八千里呢？当然还是得学习。怎么处理好工作和学习呢？我觉得就是~~~
+就是定一个小目标并且完成它。
+接下来的小目标是：
+
+12月11号以前完成IO和NIO的总结~
+12月14号以前完成Vert.x蓝图系列的搭建与理解~
+12月24号以前完成对">
+<meta property="og:updated_time" content="2016-12-07T14:03:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="多线程学习—2-volatile的使用">
-<meta name="twitter:description" content="前言​        今天继续学习多线程，本来volatile关键字应该很好理解，不需要单独写博客记录。但是今天碰到些我暂时不能解释的问题，固贴出来交流一下。
-volatile​        根据JMM，Java中有一块主内存，不同的线程有自己的工作内存，同一个变量值在主内存中有一份，如果线程用到了这个变量的话，自己的工作内存中有一份一模一样的拷贝。每次进入线程从主内存中拿到变量值，每次执行完线">
+<meta name="twitter:title" content="一个小目标">
+<meta name="twitter:description" content="说点啥工作越来越忙，工作和学习似乎是要打着架抢时间呢。接触的越多，发现不懂得越多，心里慌慌的，有时忽然感觉自己啥也不会，离大成之日还剩十万八千里。怎么走完这十万八千里呢？当然还是得学习。怎么处理好工作和学习呢？我觉得就是~~~
+就是定一个小目标并且完成它。
+接下来的小目标是：
+
+12月11号以前完成IO和NIO的总结~
+12月14号以前完成Vert.x蓝图系列的搭建与理解~
+12月24号以前完成对">
 
 
 
@@ -117,10 +132,10 @@ volatile​        根据JMM，Java中有一块主内存，不同的线程有自
 
 
 
-  <link rel="canonical" href="http://yuhang.tech/2016/12/01/multiThread2/"/>
+  <link rel="canonical" href="http://yuhang.tech/2016/12/07/2016-12-7-summary-1/"/>
 
 
-  <title> 多线程学习—2-volatile的使用 | 大眼技术 </title>
+  <title> 一个小目标 | 大眼技术 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -293,7 +308,7 @@ volatile​        根据JMM，Java中有一块主内存，不同的线程有自
             
             
               
-                多线程学习—2-volatile的使用
+                一个小目标
               
             
           </h1>
@@ -305,8 +320,8 @@ volatile​        根据JMM，Java中有一块主内存，不同的线程有自
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-01T12:35:47+08:00" content="2016-12-01">
-              2016-12-01
+            <time itemprop="dateCreated" datetime="2016-12-07T21:53:47+08:00" content="2016-12-07">
+              2016-12-07
             </time>
           </span>
 
@@ -319,8 +334,8 @@ volatile​        根据JMM，Java中有一块主内存，不同的线程有自
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java多线程/" itemprop="url" rel="index">
-                    <span itemprop="name">Java多线程</span>
+                  <a href="/categories/学习计划/" itemprop="url" rel="index">
+                    <span itemprop="name">学习计划</span>
                   </a>
                 </span>
 
@@ -335,8 +350,8 @@ volatile​        根据JMM，Java中有一块主内存，不同的线程有自
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/01/multiThread2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/01/multiThread2/" itemprop="commentsCount"></span>
+                <a href="/2016/12/07/2016-12-7-summary-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/07/2016-12-7-summary-1/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -346,7 +361,7 @@ volatile​        根据JMM，Java中有一块主内存，不同的线程有自
 
           
           
-             <span id="/2016/12/01/multiThread2/" class="leancloud_visitors" data-flag-title="多线程学习—2-volatile的使用">
+             <span id="/2016/12/07/2016-12-7-summary-1/" class="leancloud_visitors" data-flag-title="一个小目标">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -368,10 +383,15 @@ volatile​        根据JMM，Java中有一块主内存，不同的线程有自
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​        今天继续学习多线程，本来volatile关键字应该很好理解，不需要单独写博客记录。但是今天碰到些我暂时不能解释的问题，固贴出来交流一下。</p>
-<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>​        根据JMM，Java中有一块主内存，不同的线程有自己的工作内存，同一个变量值在主内存中有一份，如果线程用到了这个变量的话，自己的工作内存中有一份一模一样的拷贝。每次进入线程从主内存中拿到变量值，每次执行完线程将变量从工作内存同步回主内存中。</p>
-<p>​        被volatile修饰的变量，保证了每次读取到的都是最新的那个值。线程安全围绕的是<strong>可见性</strong>和<strong>原子性</strong>这两个特性展开的，<strong>volatile解决的是变量在多个线程之间的可见性，但是无法保证原子性</strong>。如下面代码所示，进入while循环时，如果不加volatile关键字，注释掉System.out.println(“running”);这行代码，程序是跳不出循环的，但是加上volatile关键字就能跳出了，这证明了volatile解决的是变量在多个线程之间的可见性。可是奇怪的是我将System.out.println(“running”);取消注释，即使不加上volatile也能跳出循环，还望明白的交流解释。我的测试环境是jdk 1.8</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> MyThread;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2016/12/1.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread3</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">    <span class="comment">//    volatile</span></div><div class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"a: "</span> + a);</div><div class="line">        <span class="keyword">while</span> (a == <span class="number">1</span>) &#123;</div><div class="line">            <span class="comment">//  System.out.println("running");</span></div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="string">"while loop end"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        MyThread3 myThread3 = <span class="keyword">new</span> MyThread3();</div><div class="line">        myThread3.start();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Thread.sleep(<span class="number">1000</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        myThread3.a = <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h1 id="说点啥"><a href="#说点啥" class="headerlink" title="说点啥"></a>说点啥</h1><p>工作越来越忙，工作和学习似乎是要打着架抢时间呢。接触的越多，发现不懂得越多，心里慌慌的，有时忽然感觉自己啥也不会，离大成之日还剩十万八千里。怎么走完这十万八千里呢？当然还是得学习。怎么处理好工作和学习呢？我觉得就是~~~</p>
+<p>就是定一个小目标并且完成它。</p>
+<p>接下来的小目标是：</p>
+<ul>
+<li>12月11号以前完成IO和NIO的总结~</li>
+<li>12月14号以前完成Vert.x蓝图系列的搭建与理解~</li>
+<li>12月24号以前完成对Vert.x源码的第一次初步学习，理解核心思想~</li>
+</ul>
+<p>好了，就这么多吧。路还很长，慢慢走吧，不要慌。只能这么安慰自己了。    </p>
 
       
     </div>
@@ -415,7 +435,7 @@ volatile​        根据JMM，Java中有一块主内存，不同的线程有自
       
         <div class="post-tags">
           
-            <a href="/tags/Java基础/" rel="tag">#Java基础</a>
+            <a href="/tags/心情感悟/" rel="tag">#心情感悟</a>
           
         </div>
       
@@ -424,17 +444,13 @@ volatile​        根据JMM，Java中有一块主内存，不同的线程有自
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/30/multiThread1/" rel="next" title="多线程学习—1-wait(),notify(),notifyAll()">
-                <i class="fa fa-chevron-left"></i> 多线程学习—1-wait(),notify(),notifyAll()
+              <a href="/2016/12/05/2016-12-5-javabase-serviceLoader/" rel="next" title="java基础-ServiceLoader">
+                <i class="fa fa-chevron-left"></i> java基础-ServiceLoader
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/02/2016-12-2-multiThread3/" rel="prev" title="多线程学习—3-ThreadLocal的使用">
-                多线程学习—3-ThreadLocal的使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -486,8 +502,8 @@ volatile​        根据JMM，Java中有一块主内存，不同的线程有自
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/01/multiThread2/"
-           data-title="多线程学习—2-volatile的使用" data-url="http://yuhang.tech/2016/12/01/multiThread2/">
+      <div class="ds-thread" data-thread-key="2016/12/07/2016-12-7-summary-1/"
+           data-title="一个小目标" data-url="http://yuhang.tech/2016/12/07/2016-12-7-summary-1/">
       </div>
     
   </div>
@@ -603,7 +619,7 @@ volatile​        根据JMM，Java中有一块主内存，不同的线程有自
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile"><span class="nav-number">1.1.</span> <span class="nav-text">volatile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#说点啥"><span class="nav-number">1.</span> <span class="nav-text">说点啥</span></a></li></ol></div>
             
           </div>
         </section>
