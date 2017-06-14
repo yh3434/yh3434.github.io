@@ -7,7 +7,7 @@
       <title><![CDATA[java基础-jdk8重新认识hashmap]]></title>
       <url>http://yuhang.tech/2017/06/14/javabase-jdk8%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86hashmap/</url>
       <content type="html"><![CDATA[<p>原文链接：<a href="http://tech.meituan.com/java-hashmap.html" target="_blank" rel="external">前利</a></p>
-<p>今天又看了一遍jdk8的源码，理解的更透彻了一些，看的时候觉得美团点评这篇文章写的很详细，对自己帮助很大就安利下~</p>
+<p>今天又看了一遍jdk8中hashmap的源码，理解的更透彻了一些，看的时候觉得美团点评这篇文章写的很详细，对自己帮助很大就安利下~</p>
 <p>下面是原文：</p>
 <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><strong>摘要</strong></h1><p>HashMap是Java程序员使用频率最高的用于映射(键值对)处理的数据类型。随着JDK（Java Developmet Kit）版本的更新，JDK1.8对HashMap底层的实现进行了优化，例如引入红黑树的数据结构和扩容的优化等。本文结合JDK1.7和JDK1.8的区别，深入探讨HashMap的结构实现和功能原理。</p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a><strong>简介</strong></h1><p>Java为数据结构中的映射定义了一个接口java.util.Map，此接口主要有四个常用的实现类，分别是HashMap、Hashtable、LinkedHashMap和TreeMap，类继承关系如下图所示：</p>
