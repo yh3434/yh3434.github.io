@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="心情感悟," />
+  <meta name="keywords" content="Java基础," />
 
 
 
@@ -84,34 +84,34 @@
 
 
 
-<meta name="description" content="说点啥工作越来越忙，工作和学习似乎是要打着架抢时间呢。接触的越多，发现不懂得越多，心里慌慌的，有时忽然感觉自己啥也不会，离大成之日还剩十万八千里。怎么走完这十万八千里呢？当然还是得学习。怎么处理好工作和学习呢？我觉得就是~~~
-就是定一个小目标并且完成它。
-接下来的小目标是：
+<meta name="description" content="volatile的作用之前写过日志记录了volatile的关于可见性的用法，也是最常见的用法。其实volatile还有一个比较常用的使用方法就是可以防止重排序。回忆一下对象的构造过程，即实例化对象的步骤（关于jvm部分后面会记录周志明老师的深入理解JAVA虚拟机的读书笔记）：
 
-12月11号以前完成IO和NIO的总结~
-12月14号以前完成Vert.x蓝图系列的搭建与理解~
-12月24号以前完成对">
+分配内存空间
+初始化对象
+将内存空间的地址复制给对象的引用
+
+但是根据JMM的规范，jvm不会干预操作系统对指令可能进行">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个小目标">
-<meta property="og:url" content="http://yuhang.tech/2016/12/07/2016-12-7-summary-1/index.html">
+<meta property="og:title" content="java基础-volatile关键字原理">
+<meta property="og:url" content="http://yuhang.tech/2017/06/14/javabase-volatile/index.html">
 <meta property="og:site_name" content="大眼技术">
-<meta property="og:description" content="说点啥工作越来越忙，工作和学习似乎是要打着架抢时间呢。接触的越多，发现不懂得越多，心里慌慌的，有时忽然感觉自己啥也不会，离大成之日还剩十万八千里。怎么走完这十万八千里呢？当然还是得学习。怎么处理好工作和学习呢？我觉得就是~~~
-就是定一个小目标并且完成它。
-接下来的小目标是：
+<meta property="og:description" content="volatile的作用之前写过日志记录了volatile的关于可见性的用法，也是最常见的用法。其实volatile还有一个比较常用的使用方法就是可以防止重排序。回忆一下对象的构造过程，即实例化对象的步骤（关于jvm部分后面会记录周志明老师的深入理解JAVA虚拟机的读书笔记）：
 
-12月11号以前完成IO和NIO的总结~
-12月14号以前完成Vert.x蓝图系列的搭建与理解~
-12月24号以前完成对">
-<meta property="og:updated_time" content="2016-12-07T14:03:35.000Z">
+分配内存空间
+初始化对象
+将内存空间的地址复制给对象的引用
+
+但是根据JMM的规范，jvm不会干预操作系统对指令可能进行">
+<meta property="og:updated_time" content="2017-06-14T12:05:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个小目标">
-<meta name="twitter:description" content="说点啥工作越来越忙，工作和学习似乎是要打着架抢时间呢。接触的越多，发现不懂得越多，心里慌慌的，有时忽然感觉自己啥也不会，离大成之日还剩十万八千里。怎么走完这十万八千里呢？当然还是得学习。怎么处理好工作和学习呢？我觉得就是~~~
-就是定一个小目标并且完成它。
-接下来的小目标是：
+<meta name="twitter:title" content="java基础-volatile关键字原理">
+<meta name="twitter:description" content="volatile的作用之前写过日志记录了volatile的关于可见性的用法，也是最常见的用法。其实volatile还有一个比较常用的使用方法就是可以防止重排序。回忆一下对象的构造过程，即实例化对象的步骤（关于jvm部分后面会记录周志明老师的深入理解JAVA虚拟机的读书笔记）：
 
-12月11号以前完成IO和NIO的总结~
-12月14号以前完成Vert.x蓝图系列的搭建与理解~
-12月24号以前完成对">
+分配内存空间
+初始化对象
+将内存空间的地址复制给对象的引用
+
+但是根据JMM的规范，jvm不会干预操作系统对指令可能进行">
 
 
 
@@ -132,10 +132,10 @@
 
 
 
-  <link rel="canonical" href="http://yuhang.tech/2016/12/07/2016-12-7-summary-1/"/>
+  <link rel="canonical" href="http://yuhang.tech/2017/06/14/javabase-volatile/"/>
 
 
-  <title> 一个小目标 | 大眼技术 </title>
+  <title> java基础-volatile关键字原理 | 大眼技术 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -308,7 +308,7 @@
             
             
               
-                一个小目标
+                java基础-volatile关键字原理
               
             
           </h1>
@@ -320,8 +320,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-07T21:53:47+08:00" content="2016-12-07">
-              2016-12-07
+            <time itemprop="dateCreated" datetime="2017-06-14T19:31:47+08:00" content="2017-06-14">
+              2017-06-14
             </time>
           </span>
 
@@ -334,8 +334,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/学习计划/" itemprop="url" rel="index">
-                    <span itemprop="name">学习计划</span>
+                  <a href="/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
                   </a>
                 </span>
 
@@ -350,8 +350,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/07/2016-12-7-summary-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/07/2016-12-7-summary-1/" itemprop="commentsCount"></span>
+                <a href="/2017/06/14/javabase-volatile/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/14/javabase-volatile/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -361,7 +361,7 @@
 
           
           
-             <span id="/2016/12/07/2016-12-7-summary-1/" class="leancloud_visitors" data-flag-title="一个小目标">
+             <span id="/2017/06/14/javabase-volatile/" class="leancloud_visitors" data-flag-title="java基础-volatile关键字原理">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -383,15 +383,31 @@
       
 
       
-        <h1 id="说点啥"><a href="#说点啥" class="headerlink" title="说点啥"></a>说点啥</h1><p>工作越来越忙，工作和学习似乎是要打着架抢时间呢。接触的越多，发现不懂得越多，心里慌慌的，有时忽然感觉自己啥也不会，离大成之日还剩十万八千里。怎么走完这十万八千里呢？当然还是得学习。怎么处理好工作和学习呢？我觉得就是~~~</p>
-<p>就是定一个小目标并且完成它。</p>
-<p>接下来的小目标是：</p>
+        <h1 id="volatile的作用"><a href="#volatile的作用" class="headerlink" title="volatile的作用"></a>volatile的作用</h1><p>之前写过日志记录了volatile的关于可见性的用法，也是最常见的用法。其实volatile还有一个比较常用的使用方法就是可以防止重排序。回忆一下对象的构造过程，即实例化对象的步骤（关于jvm部分后面会记录周志明老师的深入理解JAVA虚拟机的读书笔记）：</p>
 <ul>
-<li>12月11号以前完成IO和NIO的总结~</li>
-<li>12月14号以前完成Vert.x蓝图系列的搭建与理解~</li>
-<li>12月24号以前完成对Vert.x源码的第一次初步学习，理解核心思想~</li>
+<li>分配内存空间</li>
+<li>初始化对象</li>
+<li>将内存空间的地址复制给对象的引用</li>
 </ul>
-<p>好了，就这么多吧。路还很长，慢慢走吧，不要慌。只能这么安慰自己了。    </p>
+<p>但是根据JMM的规范，jvm不会干预操作系统对指令可能进行的重排序，所以上面的过程第二条和第三条有机会发生顺序的颠倒，那么在这个情况下就会将会复制的对象的引用暴露出来。因此为了防止这个过程的重排序，我们需要将变量设置成volatile类型。</p>
+<h1 id="volatile的原理"><a href="#volatile的原理" class="headerlink" title="volatile的原理"></a>volatile的原理</h1><ul>
+<li><p><strong>可见性实现：</strong></p>
+<p>线程本身并不直接与主内存进行数据的交互，而是通过线程的工作内存来完成相应的操作。这也是导致线程间数据不可见的本质原因。因此要实现volatile变量的可见性，直接从这方面入手即可。对volatile变量的写操作与普通变量的主要区别有两点：</p>
+<ul>
+<li><p>修改volatile变量时会强制将修改后的值刷新的主内存中。</p>
+</li>
+<li><p>修改volatile变量后会导致其他线程工作内存中对应的变量值失效。因此，再读取该变量值的时候就需要重新从读取主内存中的值。</p>
+<p>通过这两个操作，就可以解决volatile变量的可见性问题。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>有序性实现</strong>：</p>
+<p>即为文章开始时写的,JMM会对volatile变量限制操作系统的重排序。</p>
+</li>
+<li><p><strong>内存屏障</strong></p>
+<p>为了实现volatile的可见性和有序性，JVM使用了一组叫做内存屏障（内存栅栏）的处理器指令。这些指令还不是很明白，后续再研究。</p>
+</li>
+</ul>
 
       
     </div>
@@ -435,7 +451,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/心情感悟/" rel="tag">#心情感悟</a>
+            <a href="/tags/Java基础/" rel="tag">#Java基础</a>
           
         </div>
       
@@ -444,17 +460,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/05/2016-12-5-javabase-serviceLoader/" rel="next" title="java基础-ServiceLoader">
-                <i class="fa fa-chevron-left"></i> java基础-ServiceLoader
+              <a href="/2016/12/25/Docker-1/" rel="next" title="Docker-1-ubuntu下Docker的安装与阿里云镜像加速">
+                <i class="fa fa-chevron-left"></i> Docker-1-ubuntu下Docker的安装与阿里云镜像加速
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/09/2016-12-9-IO-1/" rel="prev" title="IO总结-1">
-                IO总结-1 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -506,8 +518,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/07/2016-12-7-summary-1/"
-           data-title="一个小目标" data-url="http://yuhang.tech/2016/12/07/2016-12-7-summary-1/">
+      <div class="ds-thread" data-thread-key="2017/06/14/javabase-volatile/"
+           data-title="java基础-volatile关键字原理" data-url="http://yuhang.tech/2017/06/14/javabase-volatile/">
       </div>
     
   </div>
@@ -560,7 +572,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -569,7 +581,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -623,7 +635,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#说点啥"><span class="nav-number">1.</span> <span class="nav-text">说点啥</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile的作用"><span class="nav-number">1.</span> <span class="nav-text">volatile的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile的原理"><span class="nav-number">2.</span> <span class="nav-text">volatile的原理</span></a></li></ol></div>
             
           </div>
         </section>
@@ -642,7 +654,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
