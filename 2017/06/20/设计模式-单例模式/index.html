@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="虞行, 技术博客" />
+  <meta name="keywords" content="设计模式," />
 
 
 
@@ -84,15 +84,19 @@
 
 
 
-<meta name="description" content="我不曾有一刻敢去懈怠。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="大眼技术">
-<meta property="og:url" content="http://yuhang.tech/tags/测试/index.html">
+<meta name="description" content="单例模式单例模式属于最常用也比较简单，基本有几种写法。
+无并发12345678910111213public class Singleton &amp;#123;    //一个静态的实例    private static Singleton singleton;    //私有化构造函数    private Singleton()&amp;#123;&amp;#125;    //给出一个公共的静态方法返回一个单一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式-单例模式">
+<meta property="og:url" content="http://yuhang.tech/2017/06/20/设计模式-单例模式/index.html">
 <meta property="og:site_name" content="大眼技术">
-<meta property="og:description" content="我不曾有一刻敢去懈怠。">
+<meta property="og:description" content="单例模式单例模式属于最常用也比较简单，基本有几种写法。
+无并发12345678910111213public class Singleton &amp;#123;    //一个静态的实例    private static Singleton singleton;    //私有化构造函数    private Singleton()&amp;#123;&amp;#125;    //给出一个公共的静态方法返回一个单一">
+<meta property="og:updated_time" content="2017-06-20T13:28:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="大眼技术">
-<meta name="twitter:description" content="我不曾有一刻敢去懈怠。">
+<meta name="twitter:title" content="设计模式-单例模式">
+<meta name="twitter:description" content="单例模式单例模式属于最常用也比较简单，基本有几种写法。
+无并发12345678910111213public class Singleton &amp;#123;    //一个静态的实例    private static Singleton singleton;    //私有化构造函数    private Singleton()&amp;#123;&amp;#125;    //给出一个公共的静态方法返回一个单一">
 
 
 
@@ -113,10 +117,10 @@
 
 
 
-  <link rel="canonical" href="http://yuhang.tech/tags/测试/"/>
+  <link rel="canonical" href="http://yuhang.tech/2017/06/20/设计模式-单例模式/"/>
 
 
-  <title> 标签: 测试 | 大眼技术 </title>
+  <title> 设计模式-单例模式 | 大眼技术 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -147,7 +151,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -268,53 +272,228 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        测试
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                设计模式-单例模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-20T19:53:17+08:00" content="2017-06-20">
+              2017-06-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/20/设计模式-单例模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/20/设计模式-单例模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/06/20/设计模式-单例模式/" class="leancloud_visitors" data-flag-title="设计模式-单例模式">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
+      
+        <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><p>单例模式属于最常用也比较简单，基本有几种写法。</p>
+<h2 id="无并发"><a href="#无并发" class="headerlink" title="无并发"></a>无并发</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    <span class="comment">//一个静态的实例</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton;</div><div class="line">    <span class="comment">//私有化构造函数</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">    <span class="comment">//给出一个公共的静态方法返回一个单一实例</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;</div><div class="line">            singleton = <span class="keyword">new</span> Singleton();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> singleton;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面无并发的单列模式写出了单例模式的几个基本的条件：</p>
+<p>1、构造函数私有的，即不允许从外部实例化对象。</p>
+<p>2、用static关键字修饰类实例。</p>
+<p>3、提供一个返回改单例对象的方法，上面采用的是“饿汉”式加载，即用到时才返回。</p>
+<h2 id="双重加锁"><a href="#双重加锁" class="headerlink" title="双重加锁"></a>双重加锁</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedSingleton</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//一个静态的实例</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SynchronizedSingleton synchronizedSingleton;</div><div class="line">    <span class="comment">//私有化构造函数</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SynchronizedSingleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">    <span class="comment">//给出一个公共的静态方法返回一个单一实例</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SynchronizedSingleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (synchronizedSingleton == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">synchronized</span> (SynchronizedSingleton.class) &#123;</div><div class="line">                <span class="keyword">if</span> (synchronizedSingleton == <span class="keyword">null</span>) &#123;</div><div class="line">                    synchronizedSingleton = <span class="keyword">new</span> SynchronizedSingleton();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> synchronizedSingleton;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有并发时可以采用上面这种加锁的方式，但是用于jvm不限制操作系统重排序，所以可能在并发时还是有可能会出现有的线程请求时只分配了地址却没有初始化过的对象。</p>
+<h2 id="利用JVM强制同步"><a href="#利用JVM强制同步" class="headerlink" title="利用JVM强制同步"></a>利用JVM强制同步</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> SingletonInstance.instance;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonInstance</span></span>&#123;</div><div class="line">        </div><div class="line">        <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由于jvm会保证一个类的静态属性只会在第一次加载类时初始化，所以我们无需担心初始化到一半时别的线程会使用到这个变量。</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/10/16/second/" itemprop="url">
-              
-                <span itemprop="name">测试下分类和标签</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://www.yuhang.tech/images/wechatpay.JPG" alt="Yuhang WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://www.yuhang.tech/images/alipay.JPG" alt="Yuhang Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-10-16T18:06:40+08:00"
-              content="2016-10-16" >
-          10-16
-        </time>
-      </div>
 
-    </header>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/16/linux-vi命令/" rel="next" title="Linux-vi命令">
+                <i class="fa fa-chevron-left"></i> Linux-vi命令
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
 
 
           </div>
           
 
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/06/20/设计模式-单例模式/"
+           data-title="设计模式-单例模式" data-url="http://yuhang.tech/2017/06/20/设计模式-单例模式/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -334,8 +513,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -410,6 +598,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#单例模式"><span class="nav-number">1.</span> <span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无并发"><span class="nav-number">1.1.</span> <span class="nav-text">无并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双重加锁"><span class="nav-number">1.2.</span> <span class="nav-text">双重加锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用JVM强制同步"><span class="nav-number">1.3.</span> <span class="nav-text">利用JVM强制同步</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -513,6 +712,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 

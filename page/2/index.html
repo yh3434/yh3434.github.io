@@ -292,6 +292,138 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/01/multiThread2/" itemprop="url">
+                  多线程学习—2-volatile的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-01T12:35:47+08:00" content="2016-12-01">
+              2016-12-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java多线程/" itemprop="url" rel="index">
+                    <span itemprop="name">Java多线程</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/01/multiThread2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/01/multiThread2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/01/multiThread2/" class="leancloud_visitors" data-flag-title="多线程学习—2-volatile的使用">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​        今天继续学习多线程，本来volatile关键字应该很好理解，不需要单独写博客记录。但是今天碰到些我暂时不能解释的问题，固贴出来交流一下。</p>
+<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>​        根据JMM，Java中有一块主内存，不同的线程有自己的工作内存，同一个变量值在主内存中有一份，如果线程用到了这个变量的话，自己的工作内存中有一份一模一样的拷贝。每次进入线程从主内存中拿到变量值，每次执行完线程将变量从工作内存同步回主内存中。</p>
+<p>​        被volatile修饰的变量，保证了每次读取到的都是最新的那个值。线程安全围绕的是<strong>可见性</strong>和<strong>原子性</strong>这两个特性展开的，<strong>volatile解决的是变量在多个线程之间的可见性，但是无法保证原子性</strong>。如下面代码所示，进入while循环时，如果不加volatile关键字，注释掉System.out.println(“running”);这行代码，程序是跳不出循环的，但是加上volatile关键字就能跳出了，这证明了volatile解决的是变量在多个线程之间的可见性。可是奇怪的是我将System.out.println(“running”);取消注释，即使不加上volatile也能跳出循环，还望明白的交流解释。我的测试环境是jdk 1.8</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> MyThread;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2016/12/1.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread3</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">    <span class="comment">//    volatile</span></div><div class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"a: "</span> + a);</div><div class="line">        <span class="keyword">while</span> (a == <span class="number">1</span>) &#123;</div><div class="line">            <span class="comment">//  System.out.println("running");</span></div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="string">"while loop end"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        MyThread3 myThread3 = <span class="keyword">new</span> MyThread3();</div><div class="line">        myThread3.start();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Thread.sleep(<span class="number">1000</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        myThread3.a = <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/30/multiThread1/" itemprop="url">
                   多线程学习—1-wait(),notify(),notifyAll()
                 </a>
@@ -584,7 +716,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -592,7 +724,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -601,7 +733,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

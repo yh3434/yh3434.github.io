@@ -292,6 +292,144 @@
             
               
                 
+                <a class="post-title-link" href="/2017/06/20/设计模式-单例模式/" itemprop="url">
+                  设计模式-单例模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-20T19:53:17+08:00" content="2017-06-20">
+              2017-06-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/20/设计模式-单例模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/20/设计模式-单例模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/06/20/设计模式-单例模式/" class="leancloud_visitors" data-flag-title="设计模式-单例模式">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><p>单例模式属于最常用也比较简单，基本有几种写法。</p>
+<h2 id="无并发"><a href="#无并发" class="headerlink" title="无并发"></a>无并发</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    <span class="comment">//一个静态的实例</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton;</div><div class="line">    <span class="comment">//私有化构造函数</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">    <span class="comment">//给出一个公共的静态方法返回一个单一实例</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;</div><div class="line">            singleton = <span class="keyword">new</span> Singleton();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> singleton;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面无并发的单列模式写出了单例模式的几个基本的条件：</p>
+<p>1、构造函数私有的，即不允许从外部实例化对象。</p>
+<p>2、用static关键字修饰类实例。</p>
+<p>3、提供一个返回改单例对象的方法，上面采用的是“饿汉”式加载，即用到时才返回。</p>
+<h2 id="双重加锁"><a href="#双重加锁" class="headerlink" title="双重加锁"></a>双重加锁</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedSingleton</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//一个静态的实例</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SynchronizedSingleton synchronizedSingleton;</div><div class="line">    <span class="comment">//私有化构造函数</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SynchronizedSingleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">    <span class="comment">//给出一个公共的静态方法返回一个单一实例</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SynchronizedSingleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (synchronizedSingleton == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">synchronized</span> (SynchronizedSingleton.class) &#123;</div><div class="line">                <span class="keyword">if</span> (synchronizedSingleton == <span class="keyword">null</span>) &#123;</div><div class="line">                    synchronizedSingleton = <span class="keyword">new</span> SynchronizedSingleton();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> synchronizedSingleton;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有并发时可以采用上面这种加锁的方式，但是用于jvm不限制操作系统重排序，所以可能在并发时还是有可能会出现有的线程请求时只分配了地址却没有初始化过的对象。</p>
+<h2 id="利用JVM强制同步"><a href="#利用JVM强制同步" class="headerlink" title="利用JVM强制同步"></a>利用JVM强制同步</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> SingletonInstance.instance;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonInstance</span></span>&#123;</div><div class="line">        </div><div class="line">        <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由于jvm会保证一个类的静态属性只会在第一次加载类时初始化，所以我们无需担心初始化到一半时别的线程会使用到这个变量。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/06/16/linux-vi命令/" itemprop="url">
                   Linux-vi命令
                 </a>
@@ -372,7 +510,7 @@
         
           
             <h1 id="VI命令"><a href="#VI命令" class="headerlink" title="VI命令"></a>VI命令</h1><p>vi命令是UNIX操作系统和类UNIX操作系统中最通用的全屏幕纯文本编辑器。Linux中的vi编辑器叫vim，它是vi的增强版（vi Improved），与vi编辑器完全兼容，而且实现了很多增强功能。 vi编辑器支持编辑模式和命令模式，编辑模式下可以完成文本的编辑功能，命令模式下可以完成对文件的操作命令，要正确使用vi编辑器就必须熟练掌握着两种模式的切换。默认情况下，打开vi编辑器后自动进入命令模式。从编辑模式切换到命令模式使用“esc”键，从命令模式切换到编辑模式使用“A”、“a”、“O”、“o”、“I”、“i”键。 vi编辑器提供了丰富的内置命令，有些内置命令使用键盘组合键即可完成，有些内置命令则需要以冒号“：”开头输入。常用内置命令如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">Ctrl+u：向文件首翻半屏； </div><div class="line">Ctrl+d：向文件尾翻半屏； </div><div class="line">Ctrl+f：向文件尾翻一屏； </div><div class="line">Ctrl+b：向文件首翻一屏； </div><div class="line">Esc：从编辑模式切换到命令模式； </div><div class="line">ZZ：命令模式下保存当前文件所做的修改后退出vi； </div><div class="line">:行号：光标跳转到指定行的行首； </div><div class="line">:$：光标跳转到最后一行的行首； </div><div class="line">x或X：删除一个字符，x删除光标后的，而X删除光标前的； </div><div class="line">D：删除从当前光标到光标所在行尾的全部字符； </div><div class="line">dd：删除光标行正行内容； </div><div class="line">ndd：删除当前行及其后n-1行； nyy：将当前行及其下n行的内容保存到寄存器？中，其中？为一个字母，n为一个数字； p：粘贴文本操作，用于将缓存区的内容粘贴到当前光标所在位置的下方； </div><div class="line">/字符串：文本查找操作，用于从当前光标所在位置开始向文件尾部查找指定字符串的内容，查找的字符串会被加亮显示； </div><div class="line">？name：文本查找操作，用于从当前光标所在位置开始向文件头部查找指定字符串的内容，查找的字符串会被加亮显示； </div><div class="line">a，bs/F/T：替换文本操作，用于在第a行到第b行之间，将F字符串换成T字符串。其中，“s/”表示进行替换操作； a：在当前字符后添加文本； A：在行末添加文本； i：在当前字符前插入文本； I：在行首插入文本； o：在当前行后面插入一空行； O：在当前行前面插入一空行； :wq：在命令模式下，执行存盘退出操作； :w：在命令模式下，执行存盘操作； :w！：在命令模式下，执行强制存盘操作； :q：在命令模式下，执行退出vi操作； :q！：在命令模式下，执行强制退出vi操作； :e文件名：在命令模式下，打开并编辑指定名称的文件； :n：在命令模式下，如果同时打开多个文件，则继续编辑下一个文件； :f：在命令模式下，用于显示当前的文件名、光标所在行的行号以及显示比例； </div><div class="line">:set number：在命令模式下，用于在最左端显示行号； </div><div class="line">:set nonumber：在命令模式下，用于在最左端不显示行号；</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">Ctrl+u：向文件首翻半屏； </div><div class="line">Ctrl+d：向文件尾翻半屏； </div><div class="line">Ctrl+f：向文件尾翻一屏； </div><div class="line">Ctrl+b：向文件首翻一屏； </div><div class="line">Esc：从编辑模式切换到命令模式； </div><div class="line">ZZ：命令模式下保存当前文件所做的修改后退出vi； </div><div class="line">:行号：光标跳转到指定行的行首； </div><div class="line">:$：光标跳转到最后一行的行首； </div><div class="line">x或X：删除一个字符，x删除光标后的，而X删除光标前的； </div><div class="line">D：删除从当前光标到光标所在行尾的全部字符； </div><div class="line">dd：删除光标行正行内容； </div><div class="line">ndd：删除当前行及其后n-1行； </div><div class="line">nyy：将当前行及其下n行的内容保存到寄存器？中，其中？为一个字母，n为一个数字； </div><div class="line">p：粘贴文本操作，用于将缓存区的内容粘贴到当前光标所在位置的下方； </div><div class="line">/字符串：文本查找操作，用于从当前光标所在位置开始向文件尾部查找指定字符串的内容，查找的字符串会被加亮显示； </div><div class="line">？name：文本查找操作，用于从当前光标所在位置开始向文件头部查找指定字符串的内容，查找的字符串会被加亮显示； </div><div class="line">a，bs/F/T：替换文本操作，用于在第a行到第b行之间，将F字符串换成T字符串。其中，“s/”表示进行替换操作； </div><div class="line">a：在当前字符后添加文本； </div><div class="line">A：在行末添加文本； </div><div class="line">i：在当前字符前插入文本； </div><div class="line">I：在行首插入文本； </div><div class="line">o：在当前行后面插入一空行； </div><div class="line">O：在当前行前面插入一空行； </div><div class="line">:wq：在命令模式下，执行存盘退出操作； </div><div class="line">:w：在命令模式下，执行存盘操作； </div><div class="line">:w！：在命令模式下，执行强制存盘操作； </div><div class="line">:q：在命令模式下，执行退出vi操作； </div><div class="line">:q！：在命令模式下，执行强制退出vi操作； </div><div class="line">:e文件名：在命令模式下，打开并编辑指定名称的文件； </div><div class="line">:n：在命令模式下，如果同时打开多个文件，则继续编辑下一个文件； </div><div class="line">:f：在命令模式下，用于显示当前的文件名、光标所在行的行号以及显示比例； </div><div class="line">:set number：在命令模式下，用于在最左端显示行号； </div><div class="line">:set nonumber：在命令模式下，用于在最左端不显示行号；</div></pre></td></tr></table></figure>
 <h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">+&lt;行号&gt;：从指定行号的行开始先是文本内容； </div><div class="line">-b：以二进制模式打开文件，用于编辑二进制文件和可执行文件； </div><div class="line">-c&lt;指令&gt;：在完成对第一个文件编辑任务后，执行给出的指令； </div><div class="line">-d：以diff模式打开文件，当多个文件编辑时，显示文件差异部分； </div><div class="line">-l：使用lisp模式，打开“lisp”和“showmatch”； </div><div class="line">-m：取消写文件功能，重设“write”选项； </div><div class="line">-M：关闭修改功能； </div><div class="line">-n：不实用缓存功能； -</div><div class="line">o&lt;文件数目&gt;：指定同时打开指定数目的文件； </div><div class="line">-R：以只读方式打开文件； </div><div class="line">-s：安静模式，不现实指令的任何错误信息。</div></pre></td></tr></table></figure>
 
           
@@ -1701,138 +1839,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/01/multiThread2/" itemprop="url">
-                  多线程学习—2-volatile的使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-01T12:35:47+08:00" content="2016-12-01">
-              2016-12-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java多线程/" itemprop="url" rel="index">
-                    <span itemprop="name">Java多线程</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/01/multiThread2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/01/multiThread2/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/12/01/multiThread2/" class="leancloud_visitors" data-flag-title="多线程学习—2-volatile的使用">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​        今天继续学习多线程，本来volatile关键字应该很好理解，不需要单独写博客记录。但是今天碰到些我暂时不能解释的问题，固贴出来交流一下。</p>
-<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>​        根据JMM，Java中有一块主内存，不同的线程有自己的工作内存，同一个变量值在主内存中有一份，如果线程用到了这个变量的话，自己的工作内存中有一份一模一样的拷贝。每次进入线程从主内存中拿到变量值，每次执行完线程将变量从工作内存同步回主内存中。</p>
-<p>​        被volatile修饰的变量，保证了每次读取到的都是最新的那个值。线程安全围绕的是<strong>可见性</strong>和<strong>原子性</strong>这两个特性展开的，<strong>volatile解决的是变量在多个线程之间的可见性，但是无法保证原子性</strong>。如下面代码所示，进入while循环时，如果不加volatile关键字，注释掉System.out.println(“running”);这行代码，程序是跳不出循环的，但是加上volatile关键字就能跳出了，这证明了volatile解决的是变量在多个线程之间的可见性。可是奇怪的是我将System.out.println(“running”);取消注释，即使不加上volatile也能跳出循环，还望明白的交流解释。我的测试环境是jdk 1.8</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> MyThread;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2016/12/1.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread3</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">    <span class="comment">//    volatile</span></div><div class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"a: "</span> + a);</div><div class="line">        <span class="keyword">while</span> (a == <span class="number">1</span>) &#123;</div><div class="line">            <span class="comment">//  System.out.println("running");</span></div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="string">"while loop end"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        MyThread3 myThread3 = <span class="keyword">new</span> MyThread3();</div><div class="line">        myThread3.start();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Thread.sleep(<span class="number">1000</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        myThread3.a = <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1878,7 +1884,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1886,7 +1892,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1895,7 +1901,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
