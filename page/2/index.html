@@ -292,6 +292,171 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/04/2016-12-4-multiThread4/" itemprop="url">
+                  多线程学习—4-线程池的使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-04T22:13:47+08:00" content="2016-12-04">
+              2016-12-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java多线程/" itemprop="url" rel="index">
+                    <span itemprop="name">Java多线程</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/04/2016-12-4-multiThread4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/04/2016-12-4-multiThread4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/04/2016-12-4-multiThread4/" class="leancloud_visitors" data-flag-title="多线程学习—4-线程池的使用">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​    写到线程池这块先回忆一段小插曲。13年12月的时候，差不多也是现在这个季节，刚实习一个月似懂非懂拿着活就干的我第一次接触到线程池，当时是做一个上报到的任务，差不多每天需要上传70万数据到一个接口。沈阳的大背景技术不是很强，工作了三四年的一些老程序员也很少接触到多线程。当时没用多线程之前差不多是</p>
+<p>700000/(60*60*24*10)接近一天才能上报完，并且是程序不出错的情况下。于是乎白哥（我的第一个项目经理,这里要感谢白哥在我工作之初的时候谆谆教导！和第一份工作远在东北的同事们！）想到了用多线程来处理，也许是没时间研究底层，出来的效果也不尽人意，总是会丢数据，虽然时间加快到两个小时以内，不知天高地厚的我，当然也是不懂把失败策略，改了下在类似以下的代码中把原来的代码（原来代码不记得了）改为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//线程池对拒绝任务的处理策略</span></div><div class="line">  <span class="keyword">final</span> RejectedExecutionHandler Errorhandler = <span class="keyword">new</span> RejectedExecutionHandler() &#123;</div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rejectedExecution</span><span class="params">( Runnable r, ThreadPoolExecutor executor )</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!executor.isShutdown()) &#123;</div><div class="line">           r.run();</div><div class="line">        &#125;</div><div class="line">        &#125;</div><div class="line">  &#125;;</div></pre></td></tr></table></figure>
+<p> 其实就是把if语句内替换成r.run()这一句，居然奇迹般的不丢数据了，当时我第一次感到程序和多线程的魅力，后来浑浑噩噩的这么久整整三年竟然还是似懂非懂，说来惭愧！这几天继续学习多线程，刚好看到线程池这边，回忆起往事真是感慨颇多，多年前定的计划能完成的真是少之又少，希望以后能分而划之的坚持下去！</p>
+<h1 id="线程池的作用"><a href="#线程池的作用" class="headerlink" title="线程池的作用"></a>线程池的作用</h1><p><strong>线程池的作用</strong></p>
+<p>线程池的作用就2个：</p>
+<ul>
+<li>减少了创建和销毁线程的次数，每个工作线程都可以被重复利用，可执行多个任务</li>
+<li>可以根据系统的承受能力，调整线程池中工作线程的数据，防止因为消耗过多的内存导致服务器崩溃</li>
+</ul>
+<p>​       使用线程池，要根据系统的环境情况，手动或自动设置线程数目。少了系统运行效率不高，多了系统拥挤、占用内存多。用线程池控制数量，其他线程排队等候。一个任务执行完毕，再从队列中取最前面的任务开始执行。若任务中没有等待任务，线程池这一资源处于等待。当一个新任务需要运行，如果线程池中有等待的工作线程，就可以开始运行了，否则进入等待队列。</p>
+<p>​    可以适当的修改文末代码中的参数来体验一下速度或者在excute里加上sleep方法，感受下失败策略（即丢数据的情况），减小线程池数量大小可以加快速度，因为减少了线程池创建的时间，但是相应的降低了系统的处理能力。</p>
+<h1 id="参数总结"><a href="#参数总结" class="headerlink" title="参数总结"></a>参数总结</h1><ul>
+<li><p>池中线程数小于corePoolSize，新任务都不排队而是直接添加新线程</p>
+</li>
+<li><p>池中线程数大于等于corePoolSize，workQueue未满，首选将新任务假如workQueue而不是添加新线程</p>
+</li>
+<li><p>池中线程数大于等于corePoolSize，workQueue已满，但是线程数小于maximumPoolSize，添加新的线程来处理被添加的任务</p>
+</li>
+<li><p>池中线程数大于大于corePoolSize，workQueue已满，并且线程数大于等于maximumPoolSize，新任务被拒绝，使用handler处理被拒绝的任务</p>
+<p>上面的四个总结是前辈所写，由于这里主要是记录本人学习过程，就不添加链接了。</p>
+</li>
+</ul>
+<h1 id="Executors"><a href="#Executors" class="headerlink" title="Executors"></a><strong>Executors</strong></h1><p>JDK推荐的三个Executors：</p>
+<ul>
+<li><p>单线程线程池</p>
+<p>那么线程池中运行的线程数肯定是1。workQueue选择了无界的LinkedBlockingQueue，那么不管来多少任务都排队，前面一个任务执行完毕，再执行队列中的线程。从这个角度讲，第二个参数maximumPoolSize是没有意义的，因为maximumPoolSize描述的是排队的任务多过workQueue的容量，线程池中最多只能容纳maximumPoolSize个任务，现在workQueue是无界的，也就是说排队的任务永远不会多过workQueue的容量，那maximum其实设置多少都无所谓了。</p>
+</li>
+<li><p>newFixedThreadPool(int nThreads)   <strong>固定大小线程池</strong></p>
+<p>固定大小的线程池和单线程的线程池异曲同工，无非是让线程池中能运行的线程编程了手动指定的nThreads罢了。同样，由于是选择了LinkedBlockingQueue，因此其实第二个参数maximumPoolSize同样也是无意义的</p>
+</li>
+<li><p>newCachedThreadPool()   <strong>无界线程池</strong></p>
+<p>无界线程池，意思是不管多少任务提交进来，都直接运行。无界线程池采用了SynchronousQueue，采用这个线程池就没有workQueue容量一说了，只要添加进去的线程就会被拿去用。既然是无界线程池，那线程数肯定没上限，所以以maximumPoolSize为主了，设置为一个近似的无限大Integer.MAX_VALUE。 另外注意一下，单线程线程池和固定大小线程池线程都不会进行自动回收的，也即是说保证提交进来的任务最终都会被处理，但至于什么时候处理，就要看处理能力了。但是无界线程池是设置了回收时间的，由于corePoolSize为0，所以只要60秒没有被用到的线程都会被直接移除。</p>
+<p>​</p>
+</li>
+</ul>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> MyThread;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"><span class="keyword">import</span> java.util.Vector;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2016/12/4.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread9</span> </span>&#123;</div><div class="line">    <span class="comment">//维护线程池最小的数量</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CORE_POOL_SIZE = <span class="number">100</span>;<span class="comment">//改完1速度更快了，因为开启线程数量变少，但是相应的系统处理能力就变弱了</span></div><div class="line">    <span class="comment">//线程池维护的最大数量</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_POOL_SIZE = <span class="number">100</span>;</div><div class="line">    <span class="comment">//线程池维护线程所允许的空余时间</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> KEEP_ALIVE_TIME = <span class="number">0</span>;</div><div class="line">    <span class="comment">//缓冲队列的大小</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> WORK_QUEUE_SIZE = <span class="number">2000</span>;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> List&lt;Integer&gt; l = <span class="keyword">new</span> Vector&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="comment">//线程池对拒绝任务的处理策略</span></div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> RejectedExecutionHandler Errorhandler = <span class="keyword">new</span> RejectedExecutionHandler() &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rejectedExecution</span><span class="params">(Runnable r, ThreadPoolExecutor executor)</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (!executor.isShutdown()) &#123;</div><div class="line">                <span class="comment">//r.run();</span></div><div class="line">                System.out.println(<span class="string">"注释掉 r.run() WORK_QUEUE_SIZE 为100时，会出现丢数据的情况!"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="comment">//JDK提倡用Executors三个工厂方法</span></div><div class="line">    <span class="comment">//单线程线程池</span></div><div class="line"><span class="comment">//    public static ExecutorService newSingleThreadExecutor() &#123;</span></div><div class="line"><span class="comment">//        return new FinalizableDelegatedExecutorService</span></div><div class="line"><span class="comment">//                (new ThreadPoolExecutor(1, 1,</span></div><div class="line"><span class="comment">//                        0L, TimeUnit.MILLISECONDS,</span></div><div class="line"><span class="comment">//                        new LinkedBlockingQueue&lt;&gt;()));</span></div><div class="line"><span class="comment">//    &#125;</span></div><div class="line"></div><div class="line">    <span class="comment">//无界限</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(corePoolSize, Integer.MAX_VALUE,</div><div class="line">                <span class="number">60L</span>, TimeUnit.SECONDS,</div><div class="line">                <span class="keyword">new</span> SynchronousQueue&lt;&gt;());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//固定大小线程池</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</div><div class="line">                <span class="number">0L</span>, TimeUnit.MILLISECONDS,</div><div class="line">                <span class="keyword">new</span> LinkedBlockingQueue&lt;&gt;());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> ThreadPoolExecutor tp =</div><div class="line">            <span class="keyword">new</span> ThreadPoolExecutor(CORE_POOL_SIZE, MAX_POOL_SIZE, KEEP_ALIVE_TIME, TimeUnit.SECONDS,</div><div class="line">                    <span class="keyword">new</span> LinkedBlockingQueue&lt;&gt;(WORK_QUEUE_SIZE), Errorhandler);</div><div class="line"><span class="comment">//            (ThreadPoolExecutor) MyThread9.newFixedThreadPool(1);</span></div><div class="line"><span class="comment">//            (ThreadPoolExecutor) MyThread9.newCachedThreadPool(5);</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">long</span> startTime = System.currentTimeMillis();</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2000</span>; i++) &#123;</div><div class="line">            tp.execute(</div><div class="line">                    <span class="keyword">new</span> Runnable() &#123;</div><div class="line">                        <span class="meta">@Override</span></div><div class="line">                        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                            <span class="keyword">try</span> &#123;</div><div class="line">                                Thread.sleep(<span class="number">10</span>);</div><div class="line">                            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                                e.printStackTrace();</div><div class="line">                            &#125;</div><div class="line">                            l.add(<span class="number">1</span>);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">            );</div><div class="line">            System.out.println(i);</div><div class="line">        &#125;</div><div class="line">        tp.shutdown();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            tp.awaitTermination(<span class="number">1</span>, TimeUnit.DAYS);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        System.out.println(System.currentTimeMillis() - startTime);</div><div class="line">        System.out.println(l.size());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/02/2016-12-2-multiThread3/" itemprop="url">
                   多线程学习—3-ThreadLocal的使用
                 </a>
@@ -858,7 +1023,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -866,7 +1031,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -875,7 +1040,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

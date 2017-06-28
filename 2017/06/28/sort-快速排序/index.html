@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java基础," />
+  <meta name="keywords" content="sort," />
 
 
 
@@ -84,19 +84,32 @@
 
 
 
-<meta name="description" content="前言​    写到线程池这块先回忆一段小插曲。13年12月的时候，差不多也是现在这个季节，刚实习一个月似懂非懂拿着活就干的我第一次接触到线程池，当时是做一个上报到的任务，差不多每天需要上传70万数据到一个接口。沈阳的大背景技术不是很强，工作了三四年的一些老程序员也很少接触到多线程。当时没用多线程之前差不多是
-700000/(60*60*24*10)接近一天才能上报完，并且是程序不出错的情况下。于是">
+<meta name="description" content="高效快速排序是一种快速的排序算法，平均运行时间为O(NlogN),最坏情形为O(N2)，jdk数组的排序就是以快速排序为基础的，和归并排序一样，它也是一种分治的递归算法。
+下面附上实现代码和学习时看到的一篇好的讲解：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
 <meta property="og:type" content="article">
-<meta property="og:title" content="多线程学习—4-线程池的使用">
-<meta property="og:url" content="http://yuhang.tech/2016/12/04/2016-12-4-multiThread4/index.html">
+<meta property="og:title" content="sort-快速排序">
+<meta property="og:url" content="http://yuhang.tech/2017/06/28/sort-快速排序/index.html">
 <meta property="og:site_name" content="大眼技术">
-<meta property="og:description" content="前言​    写到线程池这块先回忆一段小插曲。13年12月的时候，差不多也是现在这个季节，刚实习一个月似懂非懂拿着活就干的我第一次接触到线程池，当时是做一个上报到的任务，差不多每天需要上传70万数据到一个接口。沈阳的大背景技术不是很强，工作了三四年的一些老程序员也很少接触到多线程。当时没用多线程之前差不多是
-700000/(60*60*24*10)接近一天才能上报完，并且是程序不出错的情况下。于是">
-<meta property="og:updated_time" content="2016-12-04T15:19:54.000Z">
+<meta property="og:description" content="高效快速排序是一种快速的排序算法，平均运行时间为O(NlogN),最坏情形为O(N2)，jdk数组的排序就是以快速排序为基础的，和归并排序一样，它也是一种分治的递归算法。
+下面附上实现代码和学习时看到的一篇好的讲解：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
+<meta property="og:image" content="http://s9.51cto.com/wyfs02/M00/1A/00/wKioL1MUSNWg3HhPAAAfgmnJY0E832.jpg-wh_651x-s_2122757912.jpg">
+<meta property="og:image" content="http://s3.51cto.com/wyfs02/M00/1A/00/wKioL1MUSNbjWRw9AAAfljx73DY807.jpg">
+<meta property="og:image" content="http://s9.51cto.com/wyfs02/M00/19/FF/wKiom1MUSP7gBX4VAAAaPLt4QB0783.jpg">
+<meta property="og:image" content="http://s7.51cto.com/wyfs02/M00/19/FF/wKiom1MUSQCzWy0UAAAe9Ihqgcs108.jpg">
+<meta property="og:image" content="http://s7.51cto.com/wyfs02/M01/19/FF/wKiom1MUSQOCyGOFAAAbW4sRFRs031.jpg">
+<meta property="og:image" content="http://s2.51cto.com/wyfs02/M01/19/FF/wKiom1MUSQWiPameAAAawpa4u98529.jpg">
+<meta property="og:image" content="http://s3.51cto.com/wyfs02/M02/19/FF/wKiom1MUSQizZS4AAAAg4BoYKU8539.jpg">
+<meta property="og:image" content="http://s3.51cto.com/wyfs02/M00/19/FF/wKiom1MUSQqSkSkpAAAchtx6GUg755.jpg">
+<meta property="og:image" content="http://s8.51cto.com/wyfs02/M02/19/FF/wKiom1MUSRPjUTOIAAC-kWvhNhc591.jpg">
+<meta property="og:updated_time" content="2017-06-28T12:41:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="多线程学习—4-线程池的使用">
-<meta name="twitter:description" content="前言​    写到线程池这块先回忆一段小插曲。13年12月的时候，差不多也是现在这个季节，刚实习一个月似懂非懂拿着活就干的我第一次接触到线程池，当时是做一个上报到的任务，差不多每天需要上传70万数据到一个接口。沈阳的大背景技术不是很强，工作了三四年的一些老程序员也很少接触到多线程。当时没用多线程之前差不多是
-700000/(60*60*24*10)接近一天才能上报完，并且是程序不出错的情况下。于是">
+<meta name="twitter:title" content="sort-快速排序">
+<meta name="twitter:description" content="高效快速排序是一种快速的排序算法，平均运行时间为O(NlogN),最坏情形为O(N2)，jdk数组的排序就是以快速排序为基础的，和归并排序一样，它也是一种分治的递归算法。
+下面附上实现代码和学习时看到的一篇好的讲解：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
+<meta name="twitter:image" content="http://s9.51cto.com/wyfs02/M00/1A/00/wKioL1MUSNWg3HhPAAAfgmnJY0E832.jpg-wh_651x-s_2122757912.jpg">
 
 
 
@@ -117,10 +130,10 @@
 
 
 
-  <link rel="canonical" href="http://yuhang.tech/2016/12/04/2016-12-4-multiThread4/"/>
+  <link rel="canonical" href="http://yuhang.tech/2017/06/28/sort-快速排序/"/>
 
 
-  <title> 多线程学习—4-线程池的使用 | 大眼技术 </title>
+  <title> sort-快速排序 | 大眼技术 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -293,7 +306,7 @@
             
             
               
-                多线程学习—4-线程池的使用
+                sort-快速排序
               
             
           </h1>
@@ -305,8 +318,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-04T22:13:47+08:00" content="2016-12-04">
-              2016-12-04
+            <time itemprop="dateCreated" datetime="2017-06-28T21:01:21+08:00" content="2017-06-28">
+              2017-06-28
             </time>
           </span>
 
@@ -319,8 +332,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java多线程/" itemprop="url" rel="index">
-                    <span itemprop="name">Java多线程</span>
+                  <a href="/categories/sort/" itemprop="url" rel="index">
+                    <span itemprop="name">sort</span>
                   </a>
                 </span>
 
@@ -335,8 +348,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/04/2016-12-4-multiThread4/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/04/2016-12-4-multiThread4/" itemprop="commentsCount"></span>
+                <a href="/2017/06/28/sort-快速排序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/28/sort-快速排序/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -346,7 +359,7 @@
 
           
           
-             <span id="/2016/12/04/2016-12-4-multiThread4/" class="leancloud_visitors" data-flag-title="多线程学习—4-线程池的使用">
+             <span id="/2017/06/28/sort-快速排序/" class="leancloud_visitors" data-flag-title="sort-快速排序">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -368,43 +381,40 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​    写到线程池这块先回忆一段小插曲。13年12月的时候，差不多也是现在这个季节，刚实习一个月似懂非懂拿着活就干的我第一次接触到线程池，当时是做一个上报到的任务，差不多每天需要上传70万数据到一个接口。沈阳的大背景技术不是很强，工作了三四年的一些老程序员也很少接触到多线程。当时没用多线程之前差不多是</p>
-<p>700000/(60*60*24*10)接近一天才能上报完，并且是程序不出错的情况下。于是乎白哥（我的第一个项目经理,这里要感谢白哥在我工作之初的时候谆谆教导！和第一份工作远在东北的同事们！）想到了用多线程来处理，也许是没时间研究底层，出来的效果也不尽人意，总是会丢数据，虽然时间加快到两个小时以内，不知天高地厚的我，当然也是不懂把失败策略，改了下在类似以下的代码中把原来的代码（原来代码不记得了）改为：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//线程池对拒绝任务的处理策略</span></div><div class="line">  <span class="keyword">final</span> RejectedExecutionHandler Errorhandler = <span class="keyword">new</span> RejectedExecutionHandler() &#123;</div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rejectedExecution</span><span class="params">( Runnable r, ThreadPoolExecutor executor )</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!executor.isShutdown()) &#123;</div><div class="line">           r.run();</div><div class="line">        &#125;</div><div class="line">        &#125;</div><div class="line">  &#125;;</div></pre></td></tr></table></figure>
-<p> 其实就是把if语句内替换成r.run()这一句，居然奇迹般的不丢数据了，当时我第一次感到程序和多线程的魅力，后来浑浑噩噩的这么久整整三年竟然还是似懂非懂，说来惭愧！这几天继续学习多线程，刚好看到线程池这边，回忆起往事真是感慨颇多，多年前定的计划能完成的真是少之又少，希望以后能分而划之的坚持下去！</p>
-<h1 id="线程池的作用"><a href="#线程池的作用" class="headerlink" title="线程池的作用"></a>线程池的作用</h1><p><strong>线程池的作用</strong></p>
-<p>线程池的作用就2个：</p>
-<ul>
-<li>减少了创建和销毁线程的次数，每个工作线程都可以被重复利用，可执行多个任务</li>
-<li>可以根据系统的承受能力，调整线程池中工作线程的数据，防止因为消耗过多的内存导致服务器崩溃</li>
-</ul>
-<p>​       使用线程池，要根据系统的环境情况，手动或自动设置线程数目。少了系统运行效率不高，多了系统拥挤、占用内存多。用线程池控制数量，其他线程排队等候。一个任务执行完毕，再从队列中取最前面的任务开始执行。若任务中没有等待任务，线程池这一资源处于等待。当一个新任务需要运行，如果线程池中有等待的工作线程，就可以开始运行了，否则进入等待队列。</p>
-<p>​    可以适当的修改文末代码中的参数来体验一下速度或者在excute里加上sleep方法，感受下失败策略（即丢数据的情况），减小线程池数量大小可以加快速度，因为减少了线程池创建的时间，但是相应的降低了系统的处理能力。</p>
-<h1 id="参数总结"><a href="#参数总结" class="headerlink" title="参数总结"></a>参数总结</h1><ul>
-<li><p>池中线程数小于corePoolSize，新任务都不排队而是直接添加新线程</p>
-</li>
-<li><p>池中线程数大于等于corePoolSize，workQueue未满，首选将新任务假如workQueue而不是添加新线程</p>
-</li>
-<li><p>池中线程数大于等于corePoolSize，workQueue已满，但是线程数小于maximumPoolSize，添加新的线程来处理被添加的任务</p>
-</li>
-<li><p>池中线程数大于大于corePoolSize，workQueue已满，并且线程数大于等于maximumPoolSize，新任务被拒绝，使用handler处理被拒绝的任务</p>
-<p>上面的四个总结是前辈所写，由于这里主要是记录本人学习过程，就不添加链接了。</p>
-</li>
-</ul>
-<h1 id="Executors"><a href="#Executors" class="headerlink" title="Executors"></a><strong>Executors</strong></h1><p>JDK推荐的三个Executors：</p>
-<ul>
-<li><p>单线程线程池</p>
-<p>那么线程池中运行的线程数肯定是1。workQueue选择了无界的LinkedBlockingQueue，那么不管来多少任务都排队，前面一个任务执行完毕，再执行队列中的线程。从这个角度讲，第二个参数maximumPoolSize是没有意义的，因为maximumPoolSize描述的是排队的任务多过workQueue的容量，线程池中最多只能容纳maximumPoolSize个任务，现在workQueue是无界的，也就是说排队的任务永远不会多过workQueue的容量，那maximum其实设置多少都无所谓了。</p>
-</li>
-<li><p>newFixedThreadPool(int nThreads)   <strong>固定大小线程池</strong></p>
-<p>固定大小的线程池和单线程的线程池异曲同工，无非是让线程池中能运行的线程编程了手动指定的nThreads罢了。同样，由于是选择了LinkedBlockingQueue，因此其实第二个参数maximumPoolSize同样也是无意义的</p>
-</li>
-<li><p>newCachedThreadPool()   <strong>无界线程池</strong></p>
-<p>无界线程池，意思是不管多少任务提交进来，都直接运行。无界线程池采用了SynchronousQueue，采用这个线程池就没有workQueue容量一说了，只要添加进去的线程就会被拿去用。既然是无界线程池，那线程数肯定没上限，所以以maximumPoolSize为主了，设置为一个近似的无限大Integer.MAX_VALUE。 另外注意一下，单线程线程池和固定大小线程池线程都不会进行自动回收的，也即是说保证提交进来的任务最终都会被处理，但至于什么时候处理，就要看处理能力了。但是无界线程池是设置了回收时间的，由于corePoolSize为0，所以只要60秒没有被用到的线程都会被直接移除。</p>
-<p>​</p>
-</li>
-</ul>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> MyThread;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"><span class="keyword">import</span> java.util.Vector;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2016/12/4.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread9</span> </span>&#123;</div><div class="line">    <span class="comment">//维护线程池最小的数量</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CORE_POOL_SIZE = <span class="number">100</span>;<span class="comment">//改完1速度更快了，因为开启线程数量变少，但是相应的系统处理能力就变弱了</span></div><div class="line">    <span class="comment">//线程池维护的最大数量</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_POOL_SIZE = <span class="number">100</span>;</div><div class="line">    <span class="comment">//线程池维护线程所允许的空余时间</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> KEEP_ALIVE_TIME = <span class="number">0</span>;</div><div class="line">    <span class="comment">//缓冲队列的大小</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> WORK_QUEUE_SIZE = <span class="number">2000</span>;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> List&lt;Integer&gt; l = <span class="keyword">new</span> Vector&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="comment">//线程池对拒绝任务的处理策略</span></div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> RejectedExecutionHandler Errorhandler = <span class="keyword">new</span> RejectedExecutionHandler() &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rejectedExecution</span><span class="params">(Runnable r, ThreadPoolExecutor executor)</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (!executor.isShutdown()) &#123;</div><div class="line">                <span class="comment">//r.run();</span></div><div class="line">                System.out.println(<span class="string">"注释掉 r.run() WORK_QUEUE_SIZE 为100时，会出现丢数据的情况!"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="comment">//JDK提倡用Executors三个工厂方法</span></div><div class="line">    <span class="comment">//单线程线程池</span></div><div class="line"><span class="comment">//    public static ExecutorService newSingleThreadExecutor() &#123;</span></div><div class="line"><span class="comment">//        return new FinalizableDelegatedExecutorService</span></div><div class="line"><span class="comment">//                (new ThreadPoolExecutor(1, 1,</span></div><div class="line"><span class="comment">//                        0L, TimeUnit.MILLISECONDS,</span></div><div class="line"><span class="comment">//                        new LinkedBlockingQueue&lt;&gt;()));</span></div><div class="line"><span class="comment">//    &#125;</span></div><div class="line"></div><div class="line">    <span class="comment">//无界限</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(corePoolSize, Integer.MAX_VALUE,</div><div class="line">                <span class="number">60L</span>, TimeUnit.SECONDS,</div><div class="line">                <span class="keyword">new</span> SynchronousQueue&lt;&gt;());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//固定大小线程池</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</div><div class="line">                <span class="number">0L</span>, TimeUnit.MILLISECONDS,</div><div class="line">                <span class="keyword">new</span> LinkedBlockingQueue&lt;&gt;());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="keyword">final</span> ThreadPoolExecutor tp =</div><div class="line">            <span class="keyword">new</span> ThreadPoolExecutor(CORE_POOL_SIZE, MAX_POOL_SIZE, KEEP_ALIVE_TIME, TimeUnit.SECONDS,</div><div class="line">                    <span class="keyword">new</span> LinkedBlockingQueue&lt;&gt;(WORK_QUEUE_SIZE), Errorhandler);</div><div class="line"><span class="comment">//            (ThreadPoolExecutor) MyThread9.newFixedThreadPool(1);</span></div><div class="line"><span class="comment">//            (ThreadPoolExecutor) MyThread9.newCachedThreadPool(5);</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">long</span> startTime = System.currentTimeMillis();</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2000</span>; i++) &#123;</div><div class="line">            tp.execute(</div><div class="line">                    <span class="keyword">new</span> Runnable() &#123;</div><div class="line">                        <span class="meta">@Override</span></div><div class="line">                        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                            <span class="keyword">try</span> &#123;</div><div class="line">                                Thread.sleep(<span class="number">10</span>);</div><div class="line">                            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                                e.printStackTrace();</div><div class="line">                            &#125;</div><div class="line">                            l.add(<span class="number">1</span>);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">            );</div><div class="line">            System.out.println(i);</div><div class="line">        &#125;</div><div class="line">        tp.shutdown();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            tp.awaitTermination(<span class="number">1</span>, TimeUnit.DAYS);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        System.out.println(System.currentTimeMillis() - startTime);</div><div class="line">        System.out.println(l.size());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h1 id="高效"><a href="#高效" class="headerlink" title="高效"></a>高效</h1><p>快速排序是一种快速的排序算法，平均运行时间为<strong>O(NlogN)</strong>,最坏情形为<strong>O(N2)</strong>，jdk数组的排序就是以快速排序为基础的，和归并排序一样，它也是一种分治的递归算法。</p>
+<p>下面附上实现代码和学习时看到的一篇好的讲解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</div><div class="line">        quickSort(array, <span class="number">0</span>, array.length - <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 从left到right排序数组array</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> array</div><div class="line">     * <span class="doctag">@param</span> left</div><div class="line">     * <span class="doctag">@param</span> right</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> index = partition(array, left, right);</div><div class="line">        <span class="keyword">if</span> (left &lt; index - <span class="number">1</span>) &#123;</div><div class="line">            quickSort(array, left, index - <span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (index + <span class="number">1</span> &lt; right) &#123;</div><div class="line">            quickSort(array, index, right);</div><div class="line">        &#125;</div><div class="line">        System.out.println(Arrays.toString(array));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 找出一个基准点，排列数组array左边的都小于它，右边的都大于它</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> array</div><div class="line">     * <span class="doctag">@param</span> left</div><div class="line">     * <span class="doctag">@param</span> right</div><div class="line">     * <span class="doctag">@return</span> 基准值数组索引</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> pivot = array[(left + right) / <span class="number">2</span>];</div><div class="line">        <span class="keyword">int</span> temp;</div><div class="line"></div><div class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</div><div class="line">            <span class="keyword">while</span> (array[left] &lt; pivot) left++;</div><div class="line">            <span class="keyword">while</span> (array[right] &gt; pivot) right--;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (left &lt; right) &#123;</div><div class="line">                temp = array[left];</div><div class="line">                array[left] = array[right];</div><div class="line">                array[right] = temp;</div><div class="line">                left++;</div><div class="line">                right--;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> left;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>假设我们现在对“6  1  2 7  9  3  4  5 10  8”这个10个数进行排序。首先在这个序列中随便找一个数作为基准数（不要被这个名词吓到了，就是一个用来参照的数，待会你就知道它用来做啥的了）。为了方便，就让第一个数6作为基准数吧。接下来，需要将这个序列中所有比基准数大的数放在6的右边，比基准数小的数放在6的左边，类似下面这种排列：</p>
+<p>3  1  2 5  4  6  9 7  10  8</p>
+<p>在初始状态下，数字6在序列的第1位。我们的目标是将6挪到序列中间的某个位置，假设这个位置是k。现在就需要寻找这个k，并且以第k位为分界点，左边的数都小于等于6，右边的数都大于等于6。想一想，你有办法可以做到这点吗？</p>
+<h2 id="排序算法显神威"><a href="#排序算法显神威" class="headerlink" title="排序算法显神威"></a><strong>排序算法显神威</strong></h2><p>方法其实很简单：分别从初始序列“6  1  2 7  9  3  4  5 10  8”两端开始“探测”。先从右往左找一个小于6的数，再从左往右找一个大于6的数，然后交换他们。这里可以用两个变量i和j，分别指向序列最左边和最右边。我们为这两个变量起个好听的名字“哨兵i”和“哨兵j”。刚开始的时候让哨兵i指向序列的最左边（即i=1），指向数字6。让哨兵j指向序列的最右边（即=10），指向数字。</p>
+<p><img src="http://s9.51cto.com/wyfs02/M00/1A/00/wKioL1MUSNWg3HhPAAAfgmnJY0E832.jpg-wh_651x-s_2122757912.jpg" alt="094811yilrz1tkzkvlrriz.png"></p>
+<p>首先哨兵j开始出动。因为此处设置的基准数是最左边的数，所以需要让哨兵j先出动，这一点非常重要（<strong>请自己想一想为什么</strong>）。哨兵j一步一步地向左挪动（即j–），直到找到一个小于6的数停下来。接下来哨兵i再一步一步向右挪动（即i++），直到找到一个数大于6的数停下来。最后哨兵j停在了数字5面前，哨兵i停在了数字7面前。</p>
+<p><img src="http://s3.51cto.com/wyfs02/M00/1A/00/wKioL1MUSNbjWRw9AAAfljx73DY807.jpg" alt="095430axy0qkhxxkktkktk.png"></p>
+<p><img src="http://s9.51cto.com/wyfs02/M00/19/FF/wKiom1MUSP7gBX4VAAAaPLt4QB0783.jpg" alt="095437kdandfxhbtokk2qh.png"></p>
+<p>现在交换哨兵i和哨兵j所指向的元素的值。交换之后的序列如下：</p>
+<p>6  1  2  5  9 3  4  7  10  8</p>
+<p><img src="http://s7.51cto.com/wyfs02/M00/19/FF/wKiom1MUSQCzWy0UAAAe9Ihqgcs108.jpg" alt="095448k1kevwlz41373e7k.png"></p>
+<p><img src="http://s7.51cto.com/wyfs02/M01/19/FF/wKiom1MUSQOCyGOFAAAbW4sRFRs031.jpg" alt="095458ejza15wscjv7iw5c.png"></p>
+<p>到此，第一次交换结束。接下来开始哨兵j继续向左挪动（再友情提醒，每次必须是哨兵j先出发）。他发现了4（比基准数6要小，满足要求）之后停了下来。哨兵i也继续向右挪动的，他发现了9（比基准数6要大，满足要求）之后停了下来。此时再次进行交换，交换之后的序列如下：</p>
+<p>6  1  2 5  4  3  9  7 10  8</p>
+<p>第二次交换结束，“探测”继续。哨兵j继续向左挪动，他发现了3（比基准数6要小，满足要求）之后又停了下来。哨兵i继续向右移动，糟啦！此时哨兵i和哨兵j相遇了，哨兵i和哨兵j都走到3面前。说明此时“探测”结束。我们将基准数6和3进行交换。交换之后的序列如下：</p>
+<p>3  1 2  5  4  6  9 7  10  8</p>
+<p><img src="http://s2.51cto.com/wyfs02/M01/19/FF/wKiom1MUSQWiPameAAAawpa4u98529.jpg" alt="095506uz7e1uuukcblhkxv.png"></p>
+<p><img src="http://s3.51cto.com/wyfs02/M02/19/FF/wKiom1MUSQizZS4AAAAg4BoYKU8539.jpg" alt="095514cag5fumuqqg5jnsw.png"></p>
+<p><img src="http://s3.51cto.com/wyfs02/M00/19/FF/wKiom1MUSQqSkSkpAAAchtx6GUg755.jpg" alt="095530e0jf6p0y6aaaw2ir.png"></p>
+<p>到此第一轮“探测”真正结束。此时以基准数6为分界点，6左边的数都小于等于6，6右边的数都大于等于6。回顾一下刚才的过程，其实哨兵j的使命就是要找小于基准数的数，而哨兵i的使命就是要找大于基准数的数，直到i和j碰头为止。</p>
+<p>OK，解释完毕。现在基准数6已经归位，它正好处在序列的第6位。此时我们已经将原来的序列，以6为分界点拆分成了两个序列，左边的序列是“3  1 2  5  4”，右边的序列是“9  7  10  8”。接下来还需要分别处理这两个序列。因为6左边和右边的序列目前都还是很混乱的。不过不要紧，我们已经掌握了方法，接下来只要模拟刚才的方法分别处理6左边和右边的序列即可。现在先来处理6左边的序列现吧。</p>
+<p>左边的序列是“3  1  2 5  4”。请将这个序列以3为基准数进行调整，使得3左边的数都小于等于3，3右边的数都大于等于3。好了开始动笔吧</p>
+<p>如果你模拟的没有错，调整完毕之后的序列的顺序应该是：</p>
+<p>2  1  3  5  4</p>
+<p>OK，现在3已经归位。接下来需要处理3左边的序列“2 1”和右边的序列“5 4”。对序列“2 1”以2为基准数进行调整，处理完毕之后的序列为“1 2”，到此2已经归位。序列“1”只有一个数，也不需要进行任何处理。至此我们对序列“2 1”已全部处理完毕，得到序列是“1 2”。序列“5 4”的处理也仿照此方法，最后得到的序列如下：</p>
+<p>1  2  3 4  5  6 9  7  10  8</p>
+<p>对于序列“9  7  10  8”也模拟刚才的过程，直到不可拆分出新的子序列为止。最终将会得到这样的序列，如下</p>
+<p>1  2  3 4  5  6  7  8 9  10</p>
+<p>到此，排序完全结束。细心的同学可能已经发现，快速排序的每一轮处理其实就是将这一轮的基准数归位，直到所有的数都归位为止，排序就结束了。下面上个霸气的图来描述下整个算法的处理过程。</p>
+<p><img src="http://s8.51cto.com/wyfs02/M02/19/FF/wKiom1MUSRPjUTOIAAC-kWvhNhc591.jpg" alt="232129ogop8gk0r8y7l70k.png"></p>
+<h2 id="这是为什么呢？"><a href="#这是为什么呢？" class="headerlink" title="这是为什么呢？"></a><strong>这是为什么呢？</strong></h2><p>快速排序之所比较快，因为相比冒泡排序，每次交换是跳跃式的。每次排序的时候设置一个基准点，将小于等于基准点的数全部放到基准点的左边，将大于等于基准点的数全部放到基准点的右边。这样在每次交换的时候就不会像冒泡排序一样每次只能在相邻的数之间进行交换，交换的距离就大的多了。因此总的比较和交换次数就少了，速度自然就提高了。当然在最坏的情况下，仍可能是相邻的两个数进行了交换。因此快速排序的最差时间复杂度和冒泡排序是一样的都是O(N2)，它的平均时间复杂度为O(NlogN)。其实快速排序是基于一种叫做“二分”的思想。</p>
 
       
     </div>
@@ -448,7 +458,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java基础/" rel="tag">#Java基础</a>
+            <a href="/tags/sort/" rel="tag">#sort</a>
           
         </div>
       
@@ -457,17 +467,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/02/2016-12-2-multiThread3/" rel="next" title="多线程学习—3-ThreadLocal的使用">
-                <i class="fa fa-chevron-left"></i> 多线程学习—3-ThreadLocal的使用
+              <a href="/2017/06/20/设计模式-单例模式/" rel="next" title="设计模式-单例模式">
+                <i class="fa fa-chevron-left"></i> 设计模式-单例模式
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/05/2016-12-5-multiThread5/" rel="prev" title="多线程学习—5-线程池的其他组件">
-                多线程学习—5-线程池的其他组件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -519,8 +525,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/04/2016-12-4-multiThread4/"
-           data-title="多线程学习—4-线程池的使用" data-url="http://yuhang.tech/2016/12/04/2016-12-4-multiThread4/">
+      <div class="ds-thread" data-thread-key="2017/06/28/sort-快速排序/"
+           data-title="sort-快速排序" data-url="http://yuhang.tech/2017/06/28/sort-快速排序/">
       </div>
     
   </div>
@@ -636,7 +642,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程池的作用"><span class="nav-number">2.</span> <span class="nav-text">线程池的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数总结"><span class="nav-number">3.</span> <span class="nav-text">参数总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Executors"><span class="nav-number">4.</span> <span class="nav-text">Executors</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">5.</span> <span class="nav-text">代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#高效"><span class="nav-number">1.</span> <span class="nav-text">高效</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#排序算法显神威"><span class="nav-number">2.1.</span> <span class="nav-text">排序算法显神威</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#这是为什么呢？"><span class="nav-number">2.2.</span> <span class="nav-text">这是为什么呢？</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
