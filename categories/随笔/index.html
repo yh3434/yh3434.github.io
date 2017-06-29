@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java基础," />
+  <meta name="keywords" content="虞行, 技术博客" />
 
 
 
@@ -84,22 +84,15 @@
 
 
 
-<meta name="description" content="前言​    ThreadLocal使用比较简单，重点是要理解其源码，佩服写源码的大神，为了解决散列表的冲突而引入的神奇的hash code: 0x61c88647设计太巧妙了，数学白痴就不妄言分析了直接享用大神的成果吧，反正就是为了散列均匀。直接上使用代码。
-
-ThreadLocal不是集合，它不存储任何内容，真正存储数据的集合在Thread中。ThreadLocal只是一个工具，一个往各个线程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="多线程学习—3-ThreadLocal的使用">
-<meta property="og:url" content="http://yuhang.tech/2016/12/02/2016-12-2-multiThread3/index.html">
+<meta name="description" content="我不曾有一刻敢去懈怠。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="大眼技术">
+<meta property="og:url" content="http://yuhang.tech/categories/随笔/index.html">
 <meta property="og:site_name" content="大眼技术">
-<meta property="og:description" content="前言​    ThreadLocal使用比较简单，重点是要理解其源码，佩服写源码的大神，为了解决散列表的冲突而引入的神奇的hash code: 0x61c88647设计太巧妙了，数学白痴就不妄言分析了直接享用大神的成果吧，反正就是为了散列均匀。直接上使用代码。
-
-ThreadLocal不是集合，它不存储任何内容，真正存储数据的集合在Thread中。ThreadLocal只是一个工具，一个往各个线程">
-<meta property="og:updated_time" content="2016-12-04T15:03:14.000Z">
+<meta property="og:description" content="我不曾有一刻敢去懈怠。">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="多线程学习—3-ThreadLocal的使用">
-<meta name="twitter:description" content="前言​    ThreadLocal使用比较简单，重点是要理解其源码，佩服写源码的大神，为了解决散列表的冲突而引入的神奇的hash code: 0x61c88647设计太巧妙了，数学白痴就不妄言分析了直接享用大神的成果吧，反正就是为了散列均匀。直接上使用代码。
-
-ThreadLocal不是集合，它不存储任何内容，真正存储数据的集合在Thread中。ThreadLocal只是一个工具，一个往各个线程">
+<meta name="twitter:title" content="大眼技术">
+<meta name="twitter:description" content="我不曾有一刻敢去懈怠。">
 
 
 
@@ -120,10 +113,10 @@ ThreadLocal不是集合，它不存储任何内容，真正存储数据的集合
 
 
 
-  <link rel="canonical" href="http://yuhang.tech/2016/12/02/2016-12-2-multiThread3/"/>
+  <link rel="canonical" href="http://yuhang.tech/categories/随笔/"/>
 
 
-  <title> 多线程学习—3-ThreadLocal的使用 | 大眼技术 </title>
+  <title> 分类: 随笔 | 大眼技术 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -154,7 +147,7 @@ ThreadLocal不是集合，它不存储任何内容，真正存储数据的集合
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -275,236 +268,54 @@ ThreadLocal不是集合，它不存储任何内容，真正存储数据的集合
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <section id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        随笔
+        <small>分类</small>
+      </h2>
+    </div>
 
     
-      <header class="post-header">
+      
 
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
+            <a class="post-title-link" href="/2017/06/29/随笔-与君勉/" itemprop="url">
               
-                多线程学习—3-ThreadLocal的使用
+                <span itemprop="name">随笔-劝学</span>
               
-            
-          </h1>
+            </a>
         
+      </h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-02T22:35:47+08:00" content="2016-12-02">
-              2016-12-02
-            </time>
-          </span>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-06-29T09:01:21+08:00"
+              content="2017-06-29" >
+          06-29
+        </time>
+      </div>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java多线程/" itemprop="url" rel="index">
-                    <span itemprop="name">Java多线程</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/02/2016-12-2-multiThread3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/2016-12-2-multiThread3/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/12/02/2016-12-2-multiThread3/" class="leancloud_visitors" data-flag-title="多线程学习—3-ThreadLocal的使用">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​    ThreadLocal使用比较简单，重点是要理解其源码，佩服写源码的大神，为了解决散列表的冲突而引入的神奇的hash code: <strong>0x61c88647</strong>设计太巧妙了，数学白痴就不妄言分析了直接享用大神的成果吧，反正就是为了散列均匀。直接上使用代码。</p>
-<ul>
-<li><strong>ThreadLocal不是集合</strong>，它不存储任何内容，真正存储数据的集合在Thread中。<strong>ThreadLocal只是一个工具，一个往各个线程的ThreadLocal.ThreadLocalMap中table的某一位置set一个值的工具而已</strong></li>
-</ul>
-<ul>
-<li>每个线程都有一个自己的ThreadLocal.ThreadLocalMap对象</li>
-<li>每一个ThreadLocal对象都有一个循环计数器</li>
-<li>ThreadLocal.get()取值，就是根据当前的线程，获取线程中自己的ThreadLocal.ThreadLocalMap，然后在这个Map中根据第二点中循环计数器取得一个特定value值</li>
-</ul>
-<h1 id="与同步对比"><a href="#与同步对比" class="headerlink" title="与同步对比"></a>与同步对比</h1><ul>
-<li>同步与ThreadLocal是解决多线程中数据访问问题的两种思路，<strong>前者是数据共享的思路</strong>，<strong>后者是数据隔离的思路</strong></li>
-<li>同步是一种以时间换空间的思想，ThreadLocal是一种空间换时间的思想</li>
-</ul>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> MyThread;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2016/12/2.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread4</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ThreadLocal&lt;Integer&gt; seqNum</div><div class="line">            = <span class="keyword">new</span> ThreadLocal&lt;Integer&gt;() &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> Integer <span class="title">initialValue</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNextNum</span><span class="params">()</span> </span>&#123;</div><div class="line">        seqNum.set(seqNum.get() + <span class="number">1</span>);</div><div class="line">        <span class="keyword">return</span> seqNum.get();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        MyThread4 sn = <span class="keyword">new</span> MyThread4();</div><div class="line">        TestClient t1 = <span class="keyword">new</span> TestClient(sn);</div><div class="line">        TestClient t2 = <span class="keyword">new</span> TestClient(sn);</div><div class="line">        TestClient t3 = <span class="keyword">new</span> TestClient(sn);</div><div class="line">        t1.start();</div><div class="line">        t2.start();</div><div class="line">        t3.start();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TestClient</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> MyThread4 sn;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">TestClient</span><span class="params">(MyThread4 sn)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.sn = sn;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</div><div class="line">                System.out.println(<span class="string">"thread["</span> + Thread.currentThread().getName()</div><div class="line">                        + <span class="string">"]sn["</span> + sn.getNextNum() + <span class="string">"]"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="http://www.yuhang.tech/images/wechatpay.JPG" alt="Yuhang WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="http://www.yuhang.tech/images/alipay.JPG" alt="Yuhang Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
-
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Java基础/" rel="tag">#Java基础</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/12/01/multiThread2/" rel="next" title="多线程学习—2-volatile的使用">
-                <i class="fa fa-chevron-left"></i> 多线程学习—2-volatile的使用
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/04/2016-12-4-multiThread4/" rel="prev" title="多线程学习—4-线程池的使用">
-                多线程学习—4-线程池的使用 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-        <!-- JiaThis Button BEGIN -->
-<div class="jiathis_style">
-  <a class="jiathis_button_tsina"></a>
-  <a class="jiathis_button_tqq"></a>
-  <a class="jiathis_button_weixin"></a>
-  <a class="jiathis_button_cqq"></a>
-  <a class="jiathis_button_douban"></a>
-  <a class="jiathis_button_renren"></a>
-  <a class="jiathis_button_qzone"></a>
-  <a class="jiathis_button_kaixin001"></a>
-  <a class="jiathis_button_copy"></a>
-  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
-  <a class="jiathis_counter_style"></a>
-</div>
-<script type="text/javascript" >
-  var jiathis_config={
-    hideMore:false
-  }
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-<!-- JiaThis Button END -->
+  
 
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-  <p>热评文章</p>
-  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
-
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2016/12/02/2016-12-2-multiThread3/"
-           data-title="多线程学习—3-ThreadLocal的使用" data-url="http://yuhang.tech/2016/12/02/2016-12-2-multiThread3/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -524,17 +335,8 @@ ThreadLocal不是集合，它不存储任何内容，真正存储数据的集合
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -609,17 +411,6 @@ ThreadLocal不是集合，它不存储任何内容，真正存储数据的集合
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#与同步对比"><span class="nav-number">2.</span> <span class="nav-text">与同步对比</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -723,10 +514,6 @@ ThreadLocal不是集合，它不存储任何内容，真正存储数据的集合
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
-
-
 
   
 

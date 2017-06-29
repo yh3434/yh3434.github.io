@@ -4,6 +4,20 @@
   
     
     <entry>
+      <title><![CDATA[随笔-劝学]]></title>
+      <url>http://yuhang.tech/2017/06/29/%E9%9A%8F%E7%AC%94-%E4%B8%8E%E5%90%9B%E5%8B%89/</url>
+      <content type="html"><![CDATA[<h1 id="劝学"><a href="#劝学" class="headerlink" title="劝学"></a>劝学</h1><p>颜真卿</p>
+<p><strong>三更灯火五更鸡，</strong></p>
+<p><strong>正是男儿读书时。</strong></p>
+<p><strong>黑发不知勤学早，</strong></p>
+<p><strong>白首方悔读书迟。</strong></p>
+<h1 id="浪淘沙"><a href="#浪淘沙" class="headerlink" title="浪淘沙"></a>浪淘沙</h1><p>刘禹锡</p>
+<p><strong>莫道谗言如浪深，</strong><br><strong>莫言迁客似沙沉。</strong><br><strong>千淘万漉虽辛苦，</strong><br><strong>吹尽寒沙始到金。</strong></p>
+<h1 id="自勉"><a href="#自勉" class="headerlink" title="自勉"></a>自勉</h1><p>年少不再，不能提笔成诗；浑浑噩噩，忘却行文之法；心中忐忑，借诗两首，与君共勉！</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[sort-快速排序]]></title>
       <url>http://yuhang.tech/2017/06/28/sort-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</url>
       <content type="html"><![CDATA[<h1 id="高效"><a href="#高效" class="headerlink" title="高效"></a>高效</h1><p>快速排序是一种快速的排序算法，平均运行时间为<strong>O(NlogN)</strong>,最坏情形为<strong>O(N2)</strong>，jdk数组的排序就是以快速排序为基础的，和归并排序一样，它也是一种分治的递归算法。</p>
