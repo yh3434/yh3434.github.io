@@ -292,6 +292,152 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/09/2016-12-9-IO-1/" itemprop="url">
+                  IO总结-1
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-09T21:17:47+08:00" content="2016-12-09">
+              2016-12-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/IO/" itemprop="url" rel="index">
+                    <span itemprop="name">IO</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/09/2016-12-9-IO-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/09/2016-12-9-IO-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/09/2016-12-9-IO-1/" class="leancloud_visitors" data-flag-title="IO总结-1">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="从招聘说起"><a href="#从招聘说起" class="headerlink" title="从招聘说起"></a>从招聘说起</h1><p>​        以前没事的时候总会去看各大公司招聘网站上招JAVA的要求，最后总结一件事情就是，几乎所有的公司的招聘要求都有一条：精通<strong>IO</strong>，虽然之前大家肯定也或多或少接触过IO。比如照着网上的代码写一个创建“hello.txt”的文件到硬盘中，然后往里写内容再读取出来，又或者是写个小爬虫然后各种百度用了<em>（str = buffer.readLine()）!=null</em>，把一个html打印出来， 估计一般人都这么干过。当时想的是这几行代码乱七八糟，又是File、又是Out、又是In，反正是不明觉厉，用的又不多，写的时候百度一下就好，所以各种面试的时候就提心吊胆，能搪塞就搪塞。至少我以前是有这种感悟。其实仔细梳理一番，才发现也没什么，基础好的花个半天时间就能不用百度了，半天换来对一个重要知识点的领悟，我想没有什么比这还要划算了吧？当然还是要干一行爱一行，云里雾里何时才是头呢？</p>
+<h1 id="从File开始"><a href="#从File开始" class="headerlink" title="从File开始"></a>从File开始</h1><p>​        个人习惯，我喜欢先从字面上理解，这里插一句写JDK的大神命名是相当规范的，用“中式英语”翻译一遍基本都能理解几乎所有的类名，方法名大致是干什么的了。顾明思议，file就是文件或者文件夹的，有各种格式：txt、mp3等等。这些文件都是存在硬盘上的文件，File就是JDK提供给我们来代表文件或者文件夹的类，它定义了一些与平台无关的方法来操作文件。通过调用File类提供的各种方法，能够完成创建、删除文件、重命名文件、判断文件的读写权限权限是否存在、设置和查询文件的最近修改时间等操作，所以File是流的基础。file的代码比较简单，这里就不列了。</p>
+<h1 id="讨厌的byte和byte"><a href="#讨厌的byte和byte" class="headerlink" title="讨厌的byte和byte[]"></a>讨厌的byte和byte[]</h1><p>​        byte是啥？byte[]又是啥?你能答出来吗？</p>
+<p>​        大家都知道，在计算机的世界是以二进制位存储的，1个0或者1个1就代表1个位，8个0或1即8个“位”就构成了最小的信息单位：byte，中文叫做字节。常见的1KB=1024byte就是这个意思。在JAVA语言中byte是一个基础数据类型，取值范围是<strong>-128-127</strong>，即: -2^8 到2^8-1，它也占了8个位，只不过第一个位表示符号而已。那么String和byte有什么关系呢？在java中String是以unicode编码的，占了两个字节，即16位。简单介绍下加unicode，16位即范围在 2^16（65536），即这65536个数组中每一个元素都代表一个字符，可以是汉字、日文等世界上任何一个国家上语言的文字。这样我们的java就可以根据至少两个byte，再根据编码格式去知道怎么把byte[]转换成String了，反过来也可以把String转换成byte数组了。</p>
+<h1 id="字节流和字符流"><a href="#字节流和字符流" class="headerlink" title="字节流和字符流"></a>字节流和字符流</h1><p>​        java中流有四个基础的抽象类：InputStream、OutputStream、Reader、Writer。InputStream和OutputStream为字节流设计，Reader和Writer为字符流设计，字节流和字符流形成分离的层次结构。字符流最通俗的理解是就是直接可以拿到String，其实查看源码我们也可以发现，字符流也是在字节流的基础上操作的，只不过是java为我们友好的封装了一下而已，在字符流是先写到缓冲区的，最后在cloe()或者flush()方法时才会写到物理内存中去，所以在操作字符流时还是最好用BufferReader和BufferWriter这样可以避免字符和字节流的频繁转换（这下可以理解文章开始时提到的代码了吧?），所以一定记得close！可以注释下面代码中的close方法来体验下。IO的子类确实比较多，用到了大量的装饰模式，可是构造函数的参数给我们定义的很明确，多看看API，少百度，我觉得还是比较好理解的。</p>
+<p>​        上面是我自己的总结。下面看看前辈的总结，比较专业一点。</p>
+<p><strong>总结一下流类的使用</strong></p>
+<ul>
+<li>File是一些文件/文件夹操作的源头，File代表的就是文件/文件夹本身，因此无论如何，使用IO的第一步是建议开发者根据路径实例化出一个File</li>
+<li>考虑使用字符流还是字节流。操作文本一般使用字符流，即Reader和Writer；操作字节文件使用字节流，即InputStream和OutputStream</li>
+<li>选择使用输入流还是输出流。把内容从文件读入Java内存使用输入流，即Reader和InputStream；把内容从Java内存读到文件使用输出流，即Writer和OutputStream</li>
+<li>使用字符流使用BufferedReader和BufferedWriter，它们的构造函数中的参数分别是Reader和Writer，因此既可以实例化出FileReader和FileWriter，也可以实例化出InputStreamReader和OutputStreamWriter，作为构造函数的参数传入BufferedReader和BufferedWriter</li>
+<li>FileInputStream和FileOutputStream可以直接操作文件的读写，它们没有做缓存</li>
+<li>ObjectOutputStream和ObjectInputStream，它们分别以OutputStream和InputStream作为构造函数的参数，因此可以实例化出FileOutputStream和FileInputStream并传入</li>
+</ul>
+<p>​        最后，附上我的学习代码，有一个是关于序列化的知识，有兴趣根据注释去运行下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> IO;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2016/12/7.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyIO_1</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        String path = MyIO_1.class.getResource(<span class="string">""</span>).getPath();</div><div class="line">        File file = <span class="keyword">new</span> File(path + <span class="string">"file"</span> + File.separator + MyIO_1.class.getSimpleName() + <span class="string">".txt"</span>);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line"><span class="comment">//            OutputStream out = new FileOutputStream(file);</span></div><div class="line"><span class="comment">//            byte b0[] = "虞大眼".getBytes(); //操作字节流，要转换成字节</span></div><div class="line"><span class="comment">//            out.write(b0);</span></div><div class="line"><span class="comment">//            out.close();</span></div><div class="line"><span class="comment">//            InputStream in = new FileInputStream(file);</span></div><div class="line"><span class="comment">//            byte[] b1 = new byte[(int) file.length()];</span></div><div class="line"><span class="comment">//            in.read(b1);</span></div><div class="line"><span class="comment">//            String string = new String(b1, 0, 3);</span></div><div class="line"><span class="comment">//            System.out.println(string);</span></div><div class="line"></div><div class="line">            Writer out = <span class="keyword">new</span> FileWriter(file);</div><div class="line">            BufferedWriter bufferedWriter = <span class="keyword">new</span> BufferedWriter(out);</div><div class="line">            <span class="comment">// 声明一个String类型对象</span></div><div class="line">            String str = <span class="string">"Hello World!!!"</span>;</div><div class="line">            bufferedWriter.write(str);</div><div class="line">            bufferedWriter.close();</div><div class="line">            out.close();</div><div class="line"></div><div class="line">            <span class="comment">// 读文件操作</span></div><div class="line">            Reader in = <span class="keyword">new</span> FileReader(file);</div><div class="line">            <span class="comment">// 开辟一个空间用于接收文件读进来的数据</span></div><div class="line">            <span class="keyword">char</span> c0[] = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">1024</span>];</div><div class="line">            <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">            <span class="comment">// 将c0的引用传递到read()方法之中，同时此方法返回读入数据的个数</span></div><div class="line">            i = in.read(c0);</div><div class="line">            in.close();</div><div class="line">            <span class="keyword">if</span> (-<span class="number">1</span> == i) &#123;</div><div class="line">                System.out.println(<span class="string">"文件中无数据"</span>);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                System.out.println(<span class="keyword">new</span> String(c0, <span class="number">0</span>, i) + <span class="string">"   line 42"</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            in = <span class="keyword">new</span> FileReader(file);</div><div class="line">            BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(in);</div><div class="line">            String string;</div><div class="line">            <span class="keyword">while</span> ((string = bufferedReader.readLine()) != <span class="keyword">null</span>) &#123;</div><div class="line">                System.out.println(string + <span class="string">"   line 47"</span>);</div><div class="line">            &#125;</div><div class="line">            bufferedReader.close();</div><div class="line">            in.close();</div><div class="line"></div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> IO;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2016/12/9.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyIO_3</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">2247135007662524835L</span>;</div><div class="line"></div><div class="line">        <span class="comment">//treansient修饰的不能序列化</span></div><div class="line">        <span class="keyword">private</span> <span class="keyword">transient</span> String name;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String sex = <span class="string">"man"</span>;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.name = name;</div><div class="line">            <span class="keyword">this</span>.age = age;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"姓名："</span> + <span class="keyword">this</span>.name + <span class="string">"， 年龄："</span> + <span class="keyword">this</span>.age + <span class="string">", 性别："</span> + sex;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        String path = MyIO_3.class.getResource(<span class="string">""</span>).getPath();</div><div class="line">        File file = <span class="keyword">new</span> File(path + <span class="string">"file"</span> + File.separator + MyIO_3.class.getSimpleName() + <span class="string">".txt"</span>);</div><div class="line">        serializable(file);</div><div class="line">        deserializable(file);</div><div class="line">        <span class="comment">//执行完一次后，注释serializable，只执行deserializable。修改serialVersionUID会抛InvalidClassException异常</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 序列化对象方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">serializable</span><span class="params">(File file)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        OutputStream outputFile = <span class="keyword">new</span> FileOutputStream(file);</div><div class="line">        ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(outputFile);</div><div class="line">        oos.writeObject(<span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">25</span>));</div><div class="line">        oos.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 反序列化对象方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deserializable</span><span class="params">(File file)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        InputStream inputFile = <span class="keyword">new</span> FileInputStream(file);</div><div class="line">        ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(inputFile);</div><div class="line">        Person p = (Person) ois.readObject();</div><div class="line">        System.out.println(p);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/05/2016-12-5-javabase-serviceLoader/" itemprop="url">
                   java基础-ServiceLoader
                 </a>
@@ -1318,7 +1464,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

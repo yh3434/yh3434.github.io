@@ -4,6 +4,22 @@
   
     
     <entry>
+      <title><![CDATA[java基础-parallelStream]]></title>
+      <url>http://yuhang.tech/2017/06/29/javabase-parallelStream/</url>
+      <content type="html"><![CDATA[<h1 id="parallelStream"><a href="#parallelStream" class="headerlink" title="parallelStream"></a>parallelStream</h1><p>这里不探讨parallelStream实现原理，只说明一下该注意的地方。jdk9不出意外7月份就要发布了，如果你还是在用jdk6的巨婴你该考虑换份工作了！</p>
+<p>parallelStream体验过的同学应该都知道，一个单词形容就是<strong>speed</strong>!但是酸爽的同时也埋着很多坑。下面上代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2017/6/29.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Stream</span> </span>&#123;</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</div><div class="line">        ArrayList&lt;Integer&gt; list = IntStream.range(<span class="number">0</span>, <span class="number">10000</span>).boxed().collect(Collectors.toCollection</div><div class="line">                (ArrayList::<span class="keyword">new</span>));</div><div class="line">        Vector&lt;Integer&gt; vector = <span class="keyword">new</span> Vector&lt;&gt;();</div><div class="line">        ArrayList&lt;Integer&gt; list2 = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        list.parallelStream().forEach(vector::add);</div><div class="line"><span class="comment">//        list.parallelStream().forEachOrdered(list2::add);</span></div><div class="line">        list.parallelStream().forEach(list2::add);</div><div class="line">        System.out.println(vector.size());</div><div class="line">        System.out.println(list2.size());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的代码先跑一遍~如果你没抛异常请你再运行几遍，直到出现<em>java.lang.ArrayIndexOutOfBoundsException</em>的异常，如果你没抛异常说明你运气足够好，但是输出的结果vector.size()和list2.size()应该不一样的。我们来分析一下为什么会出现异常：parallelStream底层借助了jdk7就发布的ForkJoin来多线程处理，所以当我们使用了线程不安全的ArrayList当然会在size++或者取值的时候抛出异常。但是奇怪的是为什么我把上面代码的注释去掉就不会抛异常了呢？因为parallelStream有记忆功能？有时间研究下源码~</p>
+<p>在从stream和parallelStream方法中进行选择时,我们可以考虑以下几个问题： </p>
+<ol>
+<li>是否需要并行？  </li>
+<li>任务之间是否是独立的？是否会引起任何竞态条件？  </li>
+<li>结果是否取决于任务的调用顺序？</li>
+</ol>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[java基础-TreeMap源码]]></title>
       <url>http://yuhang.tech/2017/06/29/javabase-TreeMap%E6%BA%90%E7%A0%81%E9%87%8D%E8%AF%BB/</url>
       <content type="html"><![CDATA[<h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><p>TreeMap应该算是红黑树的一种典型应用，利用红黑树进行<strong>中序遍历</strong>，完美的实现了TreeMap的的目标：按自然顺序排序。</p>
