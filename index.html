@@ -292,6 +292,163 @@
             
               
                 
+                <a class="post-title-link" href="/2017/06/29/javabase-TreeMap源码重读/" itemprop="url">
+                  java基础-TreeMap源码
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-29T12:06:21+08:00" content="2017-06-29">
+              2017-06-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/29/javabase-TreeMap源码重读/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/29/javabase-TreeMap源码重读/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/06/29/javabase-TreeMap源码重读/" class="leancloud_visitors" data-flag-title="java基础-TreeMap源码">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><p>TreeMap应该算是红黑树的一种典型应用，利用红黑树进行<strong>中序遍历</strong>，完美的实现了TreeMap的的目标：按自然顺序排序。</p>
+<p>下面讲解转自：<a href="http://yikun.github.io/2015/04/06/Java-TreeMap工作原理及实现/" target="_blank" rel="external">yikun</a></p>
+<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><blockquote>
+<p>A <strong>Red-Black tree</strong> based NavigableMap implementation. The map is sorted according to the natural ordering of its keys, or by a Comparator provided at map creation time, depending on which constructor is used.</p>
+<h1 id="This-implementation-provides-guaranteed-log-n-time-cost-for-the-containsKey-get-put-and-remove-operations-Algorithms-are-adaptations-of-those-in-Cormen-Leiserson-and-Rivest’s-Introduction-to-Algorithms"><a href="#This-implementation-provides-guaranteed-log-n-time-cost-for-the-containsKey-get-put-and-remove-operations-Algorithms-are-adaptations-of-those-in-Cormen-Leiserson-and-Rivest’s-Introduction-to-Algorithms" class="headerlink" title="This implementation provides guaranteed log(n) time cost for the containsKey, get, put and remove operations. Algorithms are adaptations of those in Cormen, Leiserson, and Rivest’s Introduction to Algorithms."></a>This implementation provides guaranteed <strong>log(n) time cost</strong> for the containsKey, get, put and remove operations. Algorithms are adaptations of those in Cormen, Leiserson, and Rivest’s Introduction to Algorithms.</h1></blockquote>
+<p>之前已经学习过HashMap和LinkedHashMap了，HashMap不保证数据有序，LinkedHashMap保证数据可以保持插入顺序，而如果我们希望Map可以保持key的大小顺序的时候，我们就需要利用TreeMap了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">TreeMap&lt;Integer, String&gt; tmap = <span class="keyword">new</span> TreeMap&lt;Integer, String&gt;();</div><div class="line">tmap.put(<span class="number">1</span>, <span class="string">"语文"</span>);</div><div class="line">tmap.put(<span class="number">3</span>, <span class="string">"英语"</span>);</div><div class="line">tmap.put(<span class="number">2</span>, <span class="string">"数学"</span>);</div><div class="line">tmap.put(<span class="number">4</span>, <span class="string">"政治"</span>);</div><div class="line">tmap.put(<span class="number">5</span>, <span class="string">"历史"</span>);</div><div class="line">tmap.put(<span class="number">6</span>, <span class="string">"地理"</span>);</div><div class="line">tmap.put(<span class="number">7</span>, <span class="string">"生物"</span>);</div><div class="line">tmap.put(<span class="number">8</span>, <span class="string">"化学"</span>);</div><div class="line"><span class="keyword">for</span>(Entry&lt;Integer, String&gt; entry : tmap.entrySet()) &#123;</div><div class="line">    System.out.println(entry.getKey() + <span class="string">": "</span> + entry.getValue());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其大致的结构如下所示：<br><img src="https://cloud.githubusercontent.com/assets/1736354/7041463/05ee676a-de0c-11e4-9412-4c6964931e43.png" alt="treemap"><br>使用红黑树的好处是能够使得树具有不错的平衡性，这样操作的速度就可以达到log(n)的水平了。具体红黑树的实现不在这里赘述，可以参考<a href="http://dongxicheng.org/structure/red-black-tree/" target="_blank" rel="external">数据结构之红黑树</a>、<a href="http://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91" target="_blank" rel="external">wikipedia-红黑树</a>等的实现。</p>
+<h2 id="2-put函数"><a href="#2-put函数" class="headerlink" title="2. put函数"></a>2. put函数</h2><blockquote>
+<p>Associates the specified value with the specified key in this map.If the map previously contained a mapping for the key, the old value is replaced.</p>
+</blockquote>
+<p>如果存在的话，old value被替换；如果不存在的话，则新添一个节点，然后对做红黑树的平衡操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</div><div class="line">    Entry&lt;K,V&gt; t = root;</div><div class="line">    <span class="keyword">if</span> (t == <span class="keyword">null</span>) &#123;</div><div class="line">        compare(key, key); <span class="comment">// type (and possibly null) check</span></div><div class="line"></div><div class="line">        root = <span class="keyword">new</span> Entry&lt;&gt;(key, value, <span class="keyword">null</span>);</div><div class="line">        size = <span class="number">1</span>;</div><div class="line">        modCount++;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> cmp;</div><div class="line">    Entry&lt;K,V&gt; parent;</div><div class="line">    <span class="comment">// split comparator and comparable paths</span></div><div class="line">    Comparator&lt;? <span class="keyword">super</span> K&gt; cpr = comparator;</div><div class="line">        <span class="comment">// 如果该节点存在，则替换值直接返回</span></div><div class="line">    <span class="keyword">if</span> (cpr != <span class="keyword">null</span>) &#123;</div><div class="line">        do &#123;</div><div class="line">            parent = t;</div><div class="line">            cmp = cpr.compare(key, t.key);</div><div class="line">            <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</div><div class="line">                t = t.left;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>)</div><div class="line">                t = t.right;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> t.setValue(value);</div><div class="line">        &#125; <span class="keyword">while</span> (t != <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">        <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">            Comparable&lt;? <span class="keyword">super</span> K&gt; k = (Comparable&lt;? <span class="keyword">super</span> K&gt;) key;</div><div class="line">        do &#123;</div><div class="line">            parent = t;</div><div class="line">            cmp = k.compareTo(t.key);</div><div class="line">            <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</div><div class="line">                t = t.left;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>)</div><div class="line">                t = t.right;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> t.setValue(value);</div><div class="line">        &#125; <span class="keyword">while</span> (t != <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line">        <span class="comment">// 如果该节点未存在，则新建</span></div><div class="line">    Entry&lt;K,V&gt; e = <span class="keyword">new</span> Entry&lt;&gt;(key, value, parent);</div><div class="line">    <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</div><div class="line">        parent.left = e;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        parent.right = e;</div><div class="line">        <span class="comment">// 红黑树平衡调整</span></div><div class="line">    fixAfterInsertion(e);</div><div class="line">    size++;</div><div class="line">    modCount++;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-get函数"><a href="#3-get函数" class="headerlink" title="3. get函数"></a>3. get函数</h2><p>get函数则相对来说比较简单，以log(n)的复杂度进行get</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">final</span> Entry&lt;K,V&gt; <span class="title">getEntry</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">    <span class="comment">// Offload comparator-based version for sake of performance</span></div><div class="line">    <span class="keyword">if</span> (comparator != <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">return</span> getEntryUsingComparator(key);</div><div class="line">    <span class="keyword">if</span> (key == <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">        Comparable&lt;? <span class="keyword">super</span> K&gt; k = (Comparable&lt;? <span class="keyword">super</span> K&gt;) key;</div><div class="line">    Entry&lt;K,V&gt; p = root;</div><div class="line">        <span class="comment">// 按照二叉树搜索的方式进行搜索，搜到返回</span></div><div class="line">    <span class="keyword">while</span> (p != <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">int</span> cmp = k.compareTo(p.key);</div><div class="line">        <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>)</div><div class="line">            p = p.left;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (cmp &gt; <span class="number">0</span>)</div><div class="line">            p = p.right;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="keyword">return</span> p;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">    Entry&lt;K,V&gt; p = getEntry(key);</div><div class="line">    <span class="keyword">return</span> (p==<span class="keyword">null</span> ? <span class="keyword">null</span> : p.value);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-successor后继"><a href="#4-successor后继" class="headerlink" title="4. successor后继"></a>4. successor后继</h2><p>TreeMap是如何保证其迭代输出是有序的呢？其实从宏观上来讲，就相当于树的中序遍历(LDR)。我们先看一下迭代输出的步骤</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(Entry&lt;Integer, String&gt; entry : tmap.entrySet()) &#123;</div><div class="line">    System.out.println(entry.getKey() + <span class="string">": "</span> + entry.getValue());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>根据<a href="http://docs.oracle.com/javase/specs/jls/se8/html/jls-14.html#jls-14.14.2" target="_blank" rel="external">The enhanced for statement</a>，for语句会做如下转换为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(Iterator&lt;Map.Entry&lt;String, String&gt;&gt; it = tmap.entrySet().iterator() ; tmap.hasNext(); ) &#123;</div><div class="line">    Entry&lt;Integer, String&gt; entry = it.next();</div><div class="line">    System.out.println(entry.getKey() + <span class="string">": "</span> + entry.getValue());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在<strong>it.next()</strong>的调用中会使用<strong>nextEntry</strong>调用<code>successor</code>这个是过的后继的重点，具体实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> &lt;K,V&gt; TreeMap.<span class="function">Entry&lt;K,V&gt; <span class="title">successor</span><span class="params">(Entry&lt;K,V&gt; t)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (t == <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (t.right != <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="comment">// 有右子树的节点，后继节点就是右子树的“最左节点”</span></div><div class="line">        <span class="comment">// 因为“最左子树”是右子树的最小节点</span></div><div class="line">        Entry&lt;K,V&gt; p = t.right;</div><div class="line">        <span class="keyword">while</span> (p.left != <span class="keyword">null</span>)</div><div class="line">            p = p.left;</div><div class="line">        <span class="keyword">return</span> p;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">// 如果右子树为空，则寻找当前节点所在左子树的第一个祖先节点</span></div><div class="line">        <span class="comment">// 因为左子树找完了，根据LDR该D了</span></div><div class="line">        Entry&lt;K,V&gt; p = t.parent;</div><div class="line">        Entry&lt;K,V&gt; ch = t;</div><div class="line">        <span class="comment">// 保证左子树</span></div><div class="line">        <span class="keyword">while</span> (p != <span class="keyword">null</span> &amp;&amp; ch == p.right) &#123;</div><div class="line">            ch = p;</div><div class="line">            p = p.parent;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> p;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>怎么理解这个successor呢？只要记住，这个是中序遍历就好了，L-D-R。具体细节如下：</p>
+<blockquote>
+<p><strong>a. 空节点，没有后继</strong><br><strong>b. 有右子树的节点，后继就是右子树的“最左节点”</strong><br><strong>c. 无右子树的节点，后继就是该节点所在左子树的第一个祖先节点</strong></p>
+</blockquote>
+<p>a.好理解，不过b, c，有点像绕口令啊，没关系，上图举个例子就懂了！</p>
+<p><strong>有右子树的节点</strong>，节点的下一个节点，肯定在右子树中，而右子树中“最左”的那个节点则是右子树中最小的一个，那么当然是<strong>右子树的“最左节点”</strong>，就好像下图所示：<br><img src="https://cloud.githubusercontent.com/assets/1736354/7045283/652d00c4-de2f-11e4-8475-1a2f46afc380.png" alt="treemap1"></p>
+<p><strong>无右子树的节点</strong>，先找到这个节点所在的左子树(右图)，那么这个节点所在的左子树的父节点(绿色节点)，就是下一个节点。<br><img src="https://cloud.githubusercontent.com/assets/1736354/7045284/68279686-de2f-11e4-8310-c9f76b3f52ab.png" alt="treemap2"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html" target="_blank" rel="external">TreeMap (Java Platform SE 8)</a><br><a href="http://www.cnblogs.com/yangecnu/p/Introduce-Red-Black-Tree.html" target="_blank" rel="external">浅谈算法和数据结构: 九 平衡查找树之红黑树</a><br><a href="http://blog.csdn.net/chenssy/article/details/26668941" target="_blank" rel="external">Java提高篇（二七）——-TreeMap</a><br><a href="http://dongxicheng.org/structure/red-black-tree/" target="_blank" rel="external">数据结构之红黑树</a><br><a href="http://zh.wikipedia.org/wiki/%E7%BA%A2%E9%BB%91%E6%A0%91" target="_blank" rel="external">wikipedia-红黑树</a><br><a href="http://www.cs.princeton.edu/~rs/talks/LLRB/RedBlack.pdf" target="_blank" rel="external">Red-Black Trees</a><br><a href="http://stackoverflow.com/questions/18063394/how-treemap-searches-successor-for-given-entry" target="_blank" rel="external">How TreeMap searches successor for given Entry?</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/06/29/随笔-与君勉/" itemprop="url">
                   随笔-劝学
                 </a>
@@ -1669,143 +1826,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/05/2016-12-5-javabase-serviceLoader/" itemprop="url">
-                  java基础-ServiceLoader
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-05T21:33:47+08:00" content="2016-12-05">
-              2016-12-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/05/2016-12-5-javabase-serviceLoader/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/05/2016-12-5-javabase-serviceLoader/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/12/05/2016-12-5-javabase-serviceLoader/" class="leancloud_visitors" data-flag-title="java基础-ServiceLoader">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​    今天在看Vert.x源码的时候，一直没找到创建vertx对象时在哪走的实现类的构造方法。后来深入进去看到一些ServiceLoader的东西，查阅资料才知道，这是一种类似Spring依赖注入的类的初始化方式，在很多知名框架都用到，对于阅读源码还是很有帮助作用的。比如:Hadoop。</p>
-<h2 id="接口代码"><a href="#接口代码" class="headerlink" title="接口代码"></a>接口代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> myInterface.ServiceLoader;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2016/12/5.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MyInterface</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="实现类代码"><a href="#实现类代码" class="headerlink" title="实现类代码"></a>实现类代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> myInterface.ServiceLoader.impl;</div><div class="line"></div><div class="line"><span class="keyword">import</span> myInterface.ServiceLoader.MyInterface;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2016/12/5.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyImpl_1</span> <span class="keyword">implements</span> <span class="title">MyInterface</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"MyImpl_2.handle()"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>再照着上面写一个MyImpl_2，同样是实现MyInterface接口。</p>
-<h2 id="测试类代码"><a href="#测试类代码" class="headerlink" title="测试类代码"></a>测试类代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> myInterface.ServiceLoader.MyInterface;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.ServiceLoader;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2016/12/5.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceLoderTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@param</span> args</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">//need to define related class full name in /META-INF/services/....</span></div><div class="line">        ServiceLoader&lt;MyInterface&gt; serviceLoader = ServiceLoader</div><div class="line">                .load(MyInterface.class);</div><div class="line">        <span class="keyword">for</span> (MyInterface service : serviceLoader) &#123;</div><div class="line">            service.handle();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">myInterface.ServiceLoader.impl.MyImpl_1</div><div class="line">myInterface.ServiceLoader.impl.MyImpl_2</div></pre></td></tr></table></figure>
-<h2 id="结构层次图"><a href="#结构层次图" class="headerlink" title="结构层次图"></a>结构层次图</h2><p><img src="http://www.yuhang.tech/images/myInterface.png" alt=""></p>
-<p><img src="http://www.yuhang.tech/images/meta_inf.png" alt=""></p>
-<p>第一次截图有点丑，凑合看下。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1851,7 +1871,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
