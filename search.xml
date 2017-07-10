@@ -4,6 +4,13 @@
   
     
     <entry>
+      <title><![CDATA[jvm-运行时区域]]></title>
+      <url>http://yuhang.tech/2017/07/10/jvm-%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8C%BA%E5%9F%9F/</url>
+      <content type="html"><![CDATA[<p><img src="./DingTalk20170710212250.png" alt="DingTalk20170710212250"></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[java基础-parallelStream]]></title>
       <url>http://yuhang.tech/2017/06/29/javabase-parallelStream/</url>
       <content type="html"><![CDATA[<h1 id="parallelStream"><a href="#parallelStream" class="headerlink" title="parallelStream"></a>parallelStream</h1><p>这里不探讨parallelStream实现原理，只说明一下该注意的地方。jdk9不出意外7月份就要发布了，如果你还是在用jdk6的巨婴你该考虑换份工作了！</p>
