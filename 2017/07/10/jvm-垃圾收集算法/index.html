@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Docker," />
+  <meta name="keywords" content="Jvm," />
 
 
 
@@ -84,34 +84,22 @@
 
 
 
-<meta name="description" content="官网链接：
-https://docs.docker.com/engine/installation/linux/ubuntulinux/
-测试主机：Ubuntu Trusty 14.04 (LTS)
-安装前请确认内核在3.10以上，查看方法
-1$ uname -r
-更新安装包信息, 确保 APT 使用 https 协议, 同时CA 证书已经被安装.
-12$ sudo apt-get update$">
+<meta name="description" content="理论上的垃圾收集算法：
+标记-清除算法​    标记-清除（Mark-Sweep）算法是最普通的算法。如同的它的名字一样，分为“标记”和“清除”两个阶段：受限标记所有需要回收的对象，在标记完成后统一回收被标记的对象。它的主要不足有两个：一个是效率问题，标记和清除两个过程的效率都不高；另一个是空间的问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后再程序运行过程中需要分配较大对">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker-1-ubuntu下Docker的安装与阿里云镜像加速">
-<meta property="og:url" content="http://yuhang.tech/2016/12/25/Docker-1/index.html">
+<meta property="og:title" content="jvm-垃圾收集算法">
+<meta property="og:url" content="http://yuhang.tech/2017/07/10/jvm-垃圾收集算法/index.html">
 <meta property="og:site_name" content="大眼技术">
-<meta property="og:description" content="官网链接：
-https://docs.docker.com/engine/installation/linux/ubuntulinux/
-测试主机：Ubuntu Trusty 14.04 (LTS)
-安装前请确认内核在3.10以上，查看方法
-1$ uname -r
-更新安装包信息, 确保 APT 使用 https 协议, 同时CA 证书已经被安装.
-12$ sudo apt-get update$">
-<meta property="og:updated_time" content="2016-12-25T17:41:23.000Z">
+<meta property="og:description" content="理论上的垃圾收集算法：
+标记-清除算法​    标记-清除（Mark-Sweep）算法是最普通的算法。如同的它的名字一样，分为“标记”和“清除”两个阶段：受限标记所有需要回收的对象，在标记完成后统一回收被标记的对象。它的主要不足有两个：一个是效率问题，标记和清除两个过程的效率都不高；另一个是空间的问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后再程序运行过程中需要分配较大对">
+<meta property="og:image" content="http://www.yuhang.tech/images/DingTalk20170712205914.png">
+<meta property="og:image" content="http://www.yuhang.tech/images/DingTalk20170712211334.png">
+<meta property="og:updated_time" content="2017-07-12T13:26:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker-1-ubuntu下Docker的安装与阿里云镜像加速">
-<meta name="twitter:description" content="官网链接：
-https://docs.docker.com/engine/installation/linux/ubuntulinux/
-测试主机：Ubuntu Trusty 14.04 (LTS)
-安装前请确认内核在3.10以上，查看方法
-1$ uname -r
-更新安装包信息, 确保 APT 使用 https 协议, 同时CA 证书已经被安装.
-12$ sudo apt-get update$">
+<meta name="twitter:title" content="jvm-垃圾收集算法">
+<meta name="twitter:description" content="理论上的垃圾收集算法：
+标记-清除算法​    标记-清除（Mark-Sweep）算法是最普通的算法。如同的它的名字一样，分为“标记”和“清除”两个阶段：受限标记所有需要回收的对象，在标记完成后统一回收被标记的对象。它的主要不足有两个：一个是效率问题，标记和清除两个过程的效率都不高；另一个是空间的问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后再程序运行过程中需要分配较大对">
+<meta name="twitter:image" content="http://www.yuhang.tech/images/DingTalk20170712205914.png">
 
 
 
@@ -132,10 +120,10 @@ https://docs.docker.com/engine/installation/linux/ubuntulinux/
 
 
 
-  <link rel="canonical" href="http://yuhang.tech/2016/12/25/Docker-1/"/>
+  <link rel="canonical" href="http://yuhang.tech/2017/07/10/jvm-垃圾收集算法/"/>
 
 
-  <title> Docker-1-ubuntu下Docker的安装与阿里云镜像加速 | 大眼技术 </title>
+  <title> jvm-垃圾收集算法 | 大眼技术 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -308,7 +296,7 @@ https://docs.docker.com/engine/installation/linux/ubuntulinux/
             
             
               
-                Docker-1-ubuntu下Docker的安装与阿里云镜像加速
+                jvm-垃圾收集算法
               
             
           </h1>
@@ -320,8 +308,8 @@ https://docs.docker.com/engine/installation/linux/ubuntulinux/
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-25T21:17:47+08:00" content="2016-12-25">
-              2016-12-25
+            <time itemprop="dateCreated" datetime="2017-07-10T21:21:21+08:00" content="2017-07-10">
+              2017-07-10
             </time>
           </span>
 
@@ -334,8 +322,8 @@ https://docs.docker.com/engine/installation/linux/ubuntulinux/
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
+                  <a href="/categories/Jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">Jvm</span>
                   </a>
                 </span>
 
@@ -350,8 +338,8 @@ https://docs.docker.com/engine/installation/linux/ubuntulinux/
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/25/Docker-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/25/Docker-1/" itemprop="commentsCount"></span>
+                <a href="/2017/07/10/jvm-垃圾收集算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/10/jvm-垃圾收集算法/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -361,7 +349,7 @@ https://docs.docker.com/engine/installation/linux/ubuntulinux/
 
           
           
-             <span id="/2016/12/25/Docker-1/" class="leancloud_visitors" data-flag-title="Docker-1-ubuntu下Docker的安装与阿里云镜像加速">
+             <span id="/2017/07/10/jvm-垃圾收集算法/" class="leancloud_visitors" data-flag-title="jvm-垃圾收集算法">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -383,49 +371,13 @@ https://docs.docker.com/engine/installation/linux/ubuntulinux/
       
 
       
-        <p>官网链接：</p>
-<p><a href="https://docs.docker.com/engine/installation/linux/ubuntulinux/" target="_blank" rel="external">https://docs.docker.com/engine/installation/linux/ubuntulinux/</a></p>
-<p>测试主机：Ubuntu Trusty 14.04 (LTS)</p>
-<p>安装前请确认内核在3.10以上，查看方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ uname -r</div></pre></td></tr></table></figure>
-<p>更新安装包信息, 确保 APT 使用 https 协议, 同时CA 证书已经被安装.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install apt-transport-https ca-certificates</div></pre></td></tr></table></figure>
-<p>添加新的GPGkey.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D</div></pre></td></tr></table></figure>
-<p>用编辑器打开  /etc/apt/sources.list.d/docker.list.</p>
-<p>如果不存在，则新建一个，增加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">deb https://apt.dockerproject.org/repo ubuntu-trusty main</div></pre></td></tr></table></figure>
-<p>更新APT 软件包索引.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div></pre></td></tr></table></figure>
-<p><strong>Ubuntu 版本相关的先决条件</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual</div></pre></td></tr></table></figure>
-<p>至此可以安装docker了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install docker-engine</div></pre></td></tr></table></figure>
-<p>启动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo service docker start</div></pre></td></tr></table></figure>
-<p>测试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo docker run hello-world</div></pre></td></tr></table></figure>
-<p>免sudo使用Docker</p>
-<ul>
-<li><p>如果还没有 docker group 就添加一个：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo groupadd docker</div></pre></td></tr></table></figure>
-</li>
-<li><p>将用户加入该 group 内。然后退出并重新登录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo gpasswd -a $&#123;USER&#125; docker</div></pre></td></tr></table></figure>
-</li>
-<li><p>重启 docker 服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo service docker restart</div></pre></td></tr></table></figure>
-</li>
-<li><p>切换当前会话到新 group</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ newgrp - docker</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>注意，最后一步是必须的，否则因为 <strong>groups</strong> 命令获取到的是缓存的组信息，刚添加的组信息未能生效，所以 <strong>docker images</strong> 执行时同样有错,测试不加sudo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker images</div></pre></td></tr></table></figure>
-<p>最后可以使用阿里云来加速我们连接Docker官网的速度！</p>
-<p>直接给出官网链接，使用后效果明显！</p>
-<p>替换daemon.json内的加速地址时需要将引号类的字符串都替换掉</p>
-<p><a href="https://yq.aliyun.com/articles/29941" target="_blank" rel="external">https://yq.aliyun.com/articles/29941</a></p>
+        <p>理论上的垃圾收集算法：</p>
+<h1 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h1><p>​    标记-清除（Mark-Sweep）算法是最普通的算法。如同的它的名字一样，分为“标记”和“清除”两个阶段：受限标记所有需要回收的对象，在标记完成后统一回收被标记的对象。它的主要不足有两个：一个是效率问题，标记和清除两个过程的效率都不高；另一个是空间的问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后再程序运行过程中需要分配较大对象时，无法找到足够的连续内存而不得不提前出发另一次垃圾手机动作。</p>
+<p><img src="http://www.yuhang.tech/images/DingTalk20170712205914.png" alt="标记-清除"></p>
+<h1 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h1><p>​    复制算法主要是为了解决标记-清除算法出现的效率问题，现在的商业虚拟机都是采用复制算法来回收新生代。它将可用内存容量划分为大小相同的两块，每次只使用其中的一块。当这一块的内存使用完了，就将还存活着的对象复制到另外一块上，然后再把已使用过的内存空间一次清理掉。这样每次都是对整个半区回收，也就不用考虑内存碎片等复杂情况。只是代价未免有点太高：内存缩小为原来的一半。</p>
+<p><img src="http://www.yuhang.tech/images/DingTalk20170712211334.png" alt="标记-清除"></p>
+<h1 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h1><p>​    复制算法在存活率较高时就要进行较多的复制，效率将会变低。标记-整理算法则是在标记之后不直接对可回收对象进行清理，二是让存活对象都移动到一端，然后直接清理边界以外的内存。</p>
+<h1 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h1><p>​    分代收集算法是根据对象存活的周期不同将内存划分为几块。一般是把堆划分为新生代和老年代，这样就可以根据各个年代的特点来采用最适当的收集算法。新生代中，由于每次垃圾回收都被发现有大批对象死去，只有少年存活，那就选用复制算法，只需要付出少年存活对象的复制成本就可以完成收集。而老年代中存活率高，没有二外的空间进行担保，就必须使用“标记-清除”或者“标记-整理”算法来进行回收。</p>
 
       
     </div>
@@ -469,7 +421,7 @@ https://docs.docker.com/engine/installation/linux/ubuntulinux/
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag">#Docker</a>
+            <a href="/tags/Jvm/" rel="tag">#Jvm</a>
           
         </div>
       
@@ -478,17 +430,13 @@ https://docs.docker.com/engine/installation/linux/ubuntulinux/
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/09/2016-12-9-IO-1/" rel="next" title="IO总结-1">
-                <i class="fa fa-chevron-left"></i> IO总结-1
+              <a href="/2017/07/10/jvm-运行时区域/" rel="next" title="jvm-运行时区域">
+                <i class="fa fa-chevron-left"></i> jvm-运行时区域
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/14/javabase-volatile/" rel="prev" title="java基础-volatile关键字原理">
-                java基础-volatile关键字原理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -540,8 +488,8 @@ https://docs.docker.com/engine/installation/linux/ubuntulinux/
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/25/Docker-1/"
-           data-title="Docker-1-ubuntu下Docker的安装与阿里云镜像加速" data-url="http://yuhang.tech/2016/12/25/Docker-1/">
+      <div class="ds-thread" data-thread-key="2017/07/10/jvm-垃圾收集算法/"
+           data-title="jvm-垃圾收集算法" data-url="http://yuhang.tech/2017/07/10/jvm-垃圾收集算法/">
       </div>
     
   </div>
@@ -657,7 +605,7 @@ https://docs.docker.com/engine/installation/linux/ubuntulinux/
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#标记-清除算法"><span class="nav-number">1.</span> <span class="nav-text">标记-清除算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复制算法"><span class="nav-number">2.</span> <span class="nav-text">复制算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#标记-整理算法"><span class="nav-number">3.</span> <span class="nav-text">标记-整理算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分代收集算法"><span class="nav-number">4.</span> <span class="nav-text">分代收集算法</span></a></li></ol></div>
             
           </div>
         </section>

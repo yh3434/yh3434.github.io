@@ -292,6 +292,141 @@
             
               
                 
+                <a class="post-title-link" href="/2017/07/10/jvm-垃圾收集算法/" itemprop="url">
+                  jvm-垃圾收集算法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-07-10T21:21:21+08:00" content="2017-07-10">
+              2017-07-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">Jvm</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/07/10/jvm-垃圾收集算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/10/jvm-垃圾收集算法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/07/10/jvm-垃圾收集算法/" class="leancloud_visitors" data-flag-title="jvm-垃圾收集算法">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>理论上的垃圾收集算法：</p>
+<h1 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h1><p>​    标记-清除（Mark-Sweep）算法是最普通的算法。如同的它的名字一样，分为“标记”和“清除”两个阶段：受限标记所有需要回收的对象，在标记完成后统一回收被标记的对象。它的主要不足有两个：一个是效率问题，标记和清除两个过程的效率都不高；另一个是空间的问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后再程序运行过程中需要分配较大对象时，无法找到足够的连续内存而不得不提前出发另一次垃圾手机动作。</p>
+<p><img src="http://www.yuhang.tech/images/DingTalk20170712205914.png" alt="标记-清除"></p>
+<h1 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h1><p>​    复制算法主要是为了解决标记-清除算法出现的效率问题，现在的商业虚拟机都是采用复制算法来回收新生代。它将可用内存容量划分为大小相同的两块，每次只使用其中的一块。当这一块的内存使用完了，就将还存活着的对象复制到另外一块上，然后再把已使用过的内存空间一次清理掉。这样每次都是对整个半区回收，也就不用考虑内存碎片等复杂情况。只是代价未免有点太高：内存缩小为原来的一半。</p>
+<p><img src="http://www.yuhang.tech/images/DingTalk20170712211334.png" alt="标记-清除"></p>
+<h1 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h1><p>​    复制算法在存活率较高时就要进行较多的复制，效率将会变低。标记-整理算法则是在标记之后不直接对可回收对象进行清理，二是让存活对象都移动到一端，然后直接清理边界以外的内存。</p>
+<h1 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h1><p>​    分代收集算法是根据对象存活的周期不同将内存划分为几块。一般是把堆划分为新生代和老年代，这样就可以根据各个年代的特点来采用最适当的收集算法。新生代中，由于每次垃圾回收都被发现有大批对象死去，只有少年存活，那就选用复制算法，只需要付出少年存活对象的复制成本就可以完成收集。而老年代中存活率高，没有二外的空间进行担保，就必须使用“标记-清除”或者“标记-整理”算法来进行回收。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/07/10/jvm-运行时区域/" itemprop="url">
                   jvm-运行时区域
                 </a>
@@ -1633,159 +1768,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/14/javabase-volatile/" itemprop="url">
-                  java基础-volatile关键字原理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-14T19:31:47+08:00" content="2017-06-14">
-              2017-06-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/14/javabase-volatile/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/14/javabase-volatile/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/06/14/javabase-volatile/" class="leancloud_visitors" data-flag-title="java基础-volatile关键字原理">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="volatile的作用"><a href="#volatile的作用" class="headerlink" title="volatile的作用"></a>volatile的作用</h1><p>之前写过日志记录了volatile的关于可见性的用法，也是最常见的用法。其实volatile还有一个比较常用的使用方法就是可以防止重排序。回忆一下对象的构造过程，即实例化对象的步骤（关于jvm部分后面会记录周志明老师的深入理解JAVA虚拟机的读书笔记）：</p>
-<ul>
-<li>分配内存空间</li>
-<li>初始化对象</li>
-<li>将内存空间的地址复制给对象的引用</li>
-</ul>
-<p>但是根据JMM的规范，jvm不会干预操作系统对指令可能进行的重排序，所以上面的过程第二条和第三条有机会发生顺序的颠倒，那么在这个情况下就会将会复制的对象的引用暴露出来。因此为了防止这个过程的重排序，我们需要将变量设置成volatile类型。</p>
-<h1 id="volatile的原理"><a href="#volatile的原理" class="headerlink" title="volatile的原理"></a>volatile的原理</h1><ul>
-<li><p><strong>可见性实现：</strong></p>
-<p>线程本身并不直接与主内存进行数据的交互，而是通过线程的工作内存来完成相应的操作。这也是导致线程间数据不可见的本质原因。因此要实现volatile变量的可见性，直接从这方面入手即可。对volatile变量的写操作与普通变量的主要区别有两点：</p>
-<ul>
-<li><p>修改volatile变量时会强制将修改后的值刷新的主内存中。</p>
-</li>
-<li><p>修改volatile变量后会导致其他线程工作内存中对应的变量值失效。因此，再读取该变量值的时候就需要重新从读取主内存中的值。</p>
-<p>通过这两个操作，就可以解决volatile变量的可见性问题。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>有序性实现</strong>：</p>
-<p>即为文章开始时写的,JMM会对volatile变量限制操作系统的重排序。</p>
-</li>
-<li><p><strong>内存屏障</strong></p>
-<p>为了实现volatile的可见性和有序性，JVM使用了一组叫做内存屏障（内存栅栏）的处理器指令。这些指令还不是很明白，后续再研究。</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1831,7 +1813,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">20</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
