@@ -4,6 +4,14 @@
   
     
     <entry>
+      <title><![CDATA[jvm-垃圾回收图谱]]></title>
+      <url>http://yuhang.tech/2017/07/13/jvm-JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%9B%BE%E8%B0%B1/</url>
+      <content type="html"><![CDATA[<p>总结图一张：</p>
+<p><img src="http://www.yuhang.tech/images/JVM_GC.png" alt="标记-清除"></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[jvm-垃圾收集算法]]></title>
       <url>http://yuhang.tech/2017/07/12/jvm-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/</url>
       <content type="html"><![CDATA[<p>理论上的垃圾收集算法：</p>
