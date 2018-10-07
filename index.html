@@ -292,6 +292,168 @@
             
               
                 
+                <a class="post-title-link" href="/2018/05/13/初始Vertx/" itemprop="url">
+                  vert.x-初识Vert.x
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-05-13T12:30:21+08:00" content="2018-05-13">
+              2018-05-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Vert-x/" itemprop="url" rel="index">
+                    <span itemprop="name">Vert.x</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/05/13/初始Vertx/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/13/初始Vertx/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/05/13/初始Vertx/" class="leancloud_visitors" data-flag-title="vert.x-初识Vert.x">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="最好的文档"><a href="#最好的文档" class="headerlink" title="最好的文档"></a>最好的文档</h1><p>​    接触到Vert.x已经有两年了，从3.2到现在的3.5.3。平时经常看到有人在社区群或者网上提问怎么vert.x怎么入门，或者哪里有入门教程,其实Vert.x的<a href="https://vertx.io/docs/#explore" target="_blank" rel="external">官放文档</a>无论是界面的赏心悦目还是例子的覆盖程度，都算是比较清楚明了。无疑这是学习Vert.x最好的地方，如果你的英文很差可以选择社区翻译的<a href="https://vertxchina.github.io/vertx-translation-chinese/" target="_blank" rel="external">中文版本</a>。</p>
+<p><img src="https://ws4.sinaimg.cn/large/0069RVTdgy1fv4qm574elj31kw1037dd.jpg" alt="documents"></p>
+<h1 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h1><p>​    Eclipse <strong>Vert.x</strong> is a tool-kit for building <strong>reactive</strong> applications on the <strong>JVM</strong>.</p>
+<p>​    上面是官网对Vert.x的定位，首先定位是tool-kit而不是framework。框架总是给人笨重的感觉，vert.x的定位不是框架还是一个工具包。你可以拿它去写一个Web服务、TCP服务，也可以用它的异步htppClient去高效的完成网络请求，甚至你可以只用它去做一个定时任务。这就是工具的定位，取你想用的。</p>
+<p>​    第二关键字是reactive，vert.x的世界里到处都是异步代码，这意味着你的应用程序可以使用少量内核线程处理大量并发。</p>
+<p>​    第三个关键字是JVM，你可以用任何jvm语言来完成你的程序，比如<strong>Java</strong>, <strong>Groovy</strong>, <strong>Ruby</strong>, <strong>Ceylon</strong>, <strong>Scala</strong> 和 <strong>Kotlin</strong>，不同于以前的多语言只是简单的互相调用，依托于eventbus(后面会讲解)，甚至可以一个语言完成一个“服务”。</p>
+<h2 id="Hello-Vert-x"><a href="#Hello-Vert-x" class="headerlink" title="Hello Vert.x"></a>Hello Vert.x</h2><p>​    上面说了一些vert.x的关键字，可能看起来比较抽象，下面我们开始用代码感受vert.x带来的异步编程的趣味。这个系列的文章示例代码都在这个<a href="https://github.com/yh3434/tutorial" target="_blank" rel="external">链接</a>里。</p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><ol>
+<li><p>拉取示例工程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/yh3434/vertx-turtorial.git</div></pre></td></tr></table></figure>
+</li>
+<li><p>打包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn clean package -DskipTests=true</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动工程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd vertx-hello/target</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar vertx-shade.jar</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>此时打开浏览器分别输入：</p>
+<ul>
+<li><a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a></li>
+<li><a href="http://localhost:8081" target="_blank" rel="external">http://localhost:8081</a></li>
+</ul>
+<p>可以看到两个hello vert.x。下面我们来分析下怎么实现这两个个Hello的。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>我们打开github上的代码看下实现。</p>
+<ol>
+<li><p>打开vertx-hello模块，可以看到工程如下：</p>
+<p><img src="https://ws1.sinaimg.cn/large/0069RVTdgy1fv5qz2wtn6j31kw0kd12f.jpg" alt="vertx-hello"></p>
+</li>
+<li><p>如果你之前没有写过“fluent”或者异步代码，可以直观的感受到和之前同步的代码有些区别。</p>
+</li>
+</ol>
+<p>恭喜你到这里你就用java和kotlin两种语言监听了8080和8081两个端口，并开启了web服务！后面的文章我会详细介绍vert.x的异步思想和线程模型等知识，并搭建一个微服务工程。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/07/13/jvm-JVM垃圾回收图谱/" itemprop="url">
                   jvm-垃圾回收图谱
                 </a>
@@ -1540,137 +1702,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/16/linux-vi命令/" itemprop="url">
-                  Linux-vi命令
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-16T09:00:17+08:00" content="2017-06-16">
-              2017-06-16
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/16/linux-vi命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/16/linux-vi命令/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/06/16/linux-vi命令/" class="leancloud_visitors" data-flag-title="Linux-vi命令">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="VI命令"><a href="#VI命令" class="headerlink" title="VI命令"></a>VI命令</h1><p>vi命令是UNIX操作系统和类UNIX操作系统中最通用的全屏幕纯文本编辑器。Linux中的vi编辑器叫vim，它是vi的增强版（vi Improved），与vi编辑器完全兼容，而且实现了很多增强功能。 vi编辑器支持编辑模式和命令模式，编辑模式下可以完成文本的编辑功能，命令模式下可以完成对文件的操作命令，要正确使用vi编辑器就必须熟练掌握着两种模式的切换。默认情况下，打开vi编辑器后自动进入命令模式。从编辑模式切换到命令模式使用“esc”键，从命令模式切换到编辑模式使用“A”、“a”、“O”、“o”、“I”、“i”键。 vi编辑器提供了丰富的内置命令，有些内置命令使用键盘组合键即可完成，有些内置命令则需要以冒号“：”开头输入。常用内置命令如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">Ctrl+u：向文件首翻半屏； </div><div class="line">Ctrl+d：向文件尾翻半屏； </div><div class="line">Ctrl+f：向文件尾翻一屏； </div><div class="line">Ctrl+b：向文件首翻一屏； </div><div class="line">Esc：从编辑模式切换到命令模式； </div><div class="line">ZZ：命令模式下保存当前文件所做的修改后退出vi； </div><div class="line">:行号：光标跳转到指定行的行首； </div><div class="line">:$：光标跳转到最后一行的行首； </div><div class="line">x或X：删除一个字符，x删除光标后的，而X删除光标前的； </div><div class="line">D：删除从当前光标到光标所在行尾的全部字符； </div><div class="line">dd：删除光标行正行内容； </div><div class="line">ndd：删除当前行及其后n-1行； </div><div class="line">nyy：将当前行及其下n行的内容保存到寄存器？中，其中？为一个字母，n为一个数字； </div><div class="line">p：粘贴文本操作，用于将缓存区的内容粘贴到当前光标所在位置的下方； </div><div class="line">/字符串：文本查找操作，用于从当前光标所在位置开始向文件尾部查找指定字符串的内容，查找的字符串会被加亮显示； </div><div class="line">？name：文本查找操作，用于从当前光标所在位置开始向文件头部查找指定字符串的内容，查找的字符串会被加亮显示； </div><div class="line">a，bs/F/T：替换文本操作，用于在第a行到第b行之间，将F字符串换成T字符串。其中，“s/”表示进行替换操作； </div><div class="line">a：在当前字符后添加文本； </div><div class="line">A：在行末添加文本； </div><div class="line">i：在当前字符前插入文本； </div><div class="line">I：在行首插入文本； </div><div class="line">o：在当前行后面插入一空行； </div><div class="line">O：在当前行前面插入一空行； </div><div class="line">:wq：在命令模式下，执行存盘退出操作； </div><div class="line">:w：在命令模式下，执行存盘操作； </div><div class="line">:w！：在命令模式下，执行强制存盘操作； </div><div class="line">:q：在命令模式下，执行退出vi操作； </div><div class="line">:q！：在命令模式下，执行强制退出vi操作； </div><div class="line">:e文件名：在命令模式下，打开并编辑指定名称的文件； </div><div class="line">:n：在命令模式下，如果同时打开多个文件，则继续编辑下一个文件； </div><div class="line">:f：在命令模式下，用于显示当前的文件名、光标所在行的行号以及显示比例； </div><div class="line">:set number：在命令模式下，用于在最左端显示行号； </div><div class="line">:set nonumber：在命令模式下，用于在最左端不显示行号；</div></pre></td></tr></table></figure>
-<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">+&lt;行号&gt;：从指定行号的行开始先是文本内容； </div><div class="line">-b：以二进制模式打开文件，用于编辑二进制文件和可执行文件； </div><div class="line">-c&lt;指令&gt;：在完成对第一个文件编辑任务后，执行给出的指令； </div><div class="line">-d：以diff模式打开文件，当多个文件编辑时，显示文件差异部分； </div><div class="line">-l：使用lisp模式，打开“lisp”和“showmatch”； </div><div class="line">-m：取消写文件功能，重设“write”选项； </div><div class="line">-M：关闭修改功能； </div><div class="line">-n：不实用缓存功能； -</div><div class="line">o&lt;文件数目&gt;：指定同时打开指定数目的文件； </div><div class="line">-R：以只读方式打开文件； </div><div class="line">-s：安静模式，不现实指令的任何错误信息。</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1716,7 +1747,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1724,7 +1755,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1733,7 +1764,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1795,7 +1826,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -292,6 +292,137 @@
             
               
                 
+                <a class="post-title-link" href="/2017/06/16/linux-vi命令/" itemprop="url">
+                  Linux-vi命令
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-16T09:00:17+08:00" content="2017-06-16">
+              2017-06-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/16/linux-vi命令/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/16/linux-vi命令/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/06/16/linux-vi命令/" class="leancloud_visitors" data-flag-title="Linux-vi命令">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="VI命令"><a href="#VI命令" class="headerlink" title="VI命令"></a>VI命令</h1><p>vi命令是UNIX操作系统和类UNIX操作系统中最通用的全屏幕纯文本编辑器。Linux中的vi编辑器叫vim，它是vi的增强版（vi Improved），与vi编辑器完全兼容，而且实现了很多增强功能。 vi编辑器支持编辑模式和命令模式，编辑模式下可以完成文本的编辑功能，命令模式下可以完成对文件的操作命令，要正确使用vi编辑器就必须熟练掌握着两种模式的切换。默认情况下，打开vi编辑器后自动进入命令模式。从编辑模式切换到命令模式使用“esc”键，从命令模式切换到编辑模式使用“A”、“a”、“O”、“o”、“I”、“i”键。 vi编辑器提供了丰富的内置命令，有些内置命令使用键盘组合键即可完成，有些内置命令则需要以冒号“：”开头输入。常用内置命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">Ctrl+u：向文件首翻半屏； </div><div class="line">Ctrl+d：向文件尾翻半屏； </div><div class="line">Ctrl+f：向文件尾翻一屏； </div><div class="line">Ctrl+b：向文件首翻一屏； </div><div class="line">Esc：从编辑模式切换到命令模式； </div><div class="line">ZZ：命令模式下保存当前文件所做的修改后退出vi； </div><div class="line">:行号：光标跳转到指定行的行首； </div><div class="line">:$：光标跳转到最后一行的行首； </div><div class="line">x或X：删除一个字符，x删除光标后的，而X删除光标前的； </div><div class="line">D：删除从当前光标到光标所在行尾的全部字符； </div><div class="line">dd：删除光标行正行内容； </div><div class="line">ndd：删除当前行及其后n-1行； </div><div class="line">nyy：将当前行及其下n行的内容保存到寄存器？中，其中？为一个字母，n为一个数字； </div><div class="line">p：粘贴文本操作，用于将缓存区的内容粘贴到当前光标所在位置的下方； </div><div class="line">/字符串：文本查找操作，用于从当前光标所在位置开始向文件尾部查找指定字符串的内容，查找的字符串会被加亮显示； </div><div class="line">？name：文本查找操作，用于从当前光标所在位置开始向文件头部查找指定字符串的内容，查找的字符串会被加亮显示； </div><div class="line">a，bs/F/T：替换文本操作，用于在第a行到第b行之间，将F字符串换成T字符串。其中，“s/”表示进行替换操作； </div><div class="line">a：在当前字符后添加文本； </div><div class="line">A：在行末添加文本； </div><div class="line">i：在当前字符前插入文本； </div><div class="line">I：在行首插入文本； </div><div class="line">o：在当前行后面插入一空行； </div><div class="line">O：在当前行前面插入一空行； </div><div class="line">:wq：在命令模式下，执行存盘退出操作； </div><div class="line">:w：在命令模式下，执行存盘操作； </div><div class="line">:w！：在命令模式下，执行强制存盘操作； </div><div class="line">:q：在命令模式下，执行退出vi操作； </div><div class="line">:q！：在命令模式下，执行强制退出vi操作； </div><div class="line">:e文件名：在命令模式下，打开并编辑指定名称的文件； </div><div class="line">:n：在命令模式下，如果同时打开多个文件，则继续编辑下一个文件； </div><div class="line">:f：在命令模式下，用于显示当前的文件名、光标所在行的行号以及显示比例； </div><div class="line">:set number：在命令模式下，用于在最左端显示行号； </div><div class="line">:set nonumber：在命令模式下，用于在最左端不显示行号；</div></pre></td></tr></table></figure>
+<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">+&lt;行号&gt;：从指定行号的行开始先是文本内容； </div><div class="line">-b：以二进制模式打开文件，用于编辑二进制文件和可执行文件； </div><div class="line">-c&lt;指令&gt;：在完成对第一个文件编辑任务后，执行给出的指令； </div><div class="line">-d：以diff模式打开文件，当多个文件编辑时，显示文件差异部分； </div><div class="line">-l：使用lisp模式，打开“lisp”和“showmatch”； </div><div class="line">-m：取消写文件功能，重设“write”选项； </div><div class="line">-M：关闭修改功能； </div><div class="line">-n：不实用缓存功能； -</div><div class="line">o&lt;文件数目&gt;：指定同时打开指定数目的文件； </div><div class="line">-R：以只读方式打开文件； </div><div class="line">-s：安静模式，不现实指令的任何错误信息。</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/06/14/javabase-jdk8重新认识hashmap/" itemprop="url">
                   java基础-jdk8重新认识hashmap
                 </a>
@@ -1702,142 +1833,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/30/multiThread1/" itemprop="url">
-                  多线程学习—1-wait(),notify(),notifyAll()
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-30T21:44:47+08:00" content="2016-11-30">
-              2016-11-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java多线程/" itemprop="url" rel="index">
-                    <span itemprop="name">Java多线程</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/30/multiThread1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/30/multiThread1/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/11/30/multiThread1/" class="leancloud_visitors" data-flag-title="多线程学习—1-wait(),notify(),notifyAll()">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>​        最近准备把多线程的知识重新过一遍，决定从基础写起。这篇主要讲的是多线程的wait(),notify(),notifyAll()方法。</p>
-<p>这三个方法都属于类方法，Object类都会有这三个方法，wait()是暂时让出<strong><em>锁</em></strong>给其他线程，而当前线程会一直阻塞直到等到notify(All)通知或者中断，而notify()和notifyAll()则是通知持有该锁的对象”<strong>等待</strong>获取该对象的对象锁”，因此必须要写在同步代码块内，至于为什么notify()和notifyAll()是通知”等待”，下面会详细解释。</p>
-<h2 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h2><p>​        wait()的作用是使当前执行代码的线程进行等待，将当前线程置入”预执行队列”中，并且wait()所在的代码处停止执行，直到接到通知或被中断。<strong>在调用wait()之前，线程必须获得该对象的锁，因此只能在同步方法/同步代码块中调用wait()方法</strong>。</p>
-<h2 id="notify-All"><a href="#notify-All" class="headerlink" title="notify(All)"></a>notify(All)</h2><p>​        notify()的作用是，如果有多个线程等待，那么线程规划器随机挑选出一个wait的线程，对其发出通知notify()，并使它等待获取该对象的对象锁。注意”等待获取该对象的对象锁”，这意味着，即使收到了通知，wait的线程也不会马上获取对象锁，必须等待notify()方法的线程释放锁才可以。<strong>和wait()一样，notify()也要在同步方法/同步代码块中调用</strong>。</p>
-<p>总结起来就是，<strong>wait()使线程停止运行，notify()使停止运行的线程继续运行</strong>。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>​        上面关于wait和notify的总结是前辈写的，下面给出我自己的示例。请大家根据注释，适当的去掉注释看看结果。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> MyThread;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2016/11/30.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread1</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">    Object lock = <span class="keyword">new</span> Object();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyThread1</span><span class="params">(Object lock)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Constructor method-&gt;&gt;CurrentThreadName:  "</span> + Thread.currentThread().getName());</div><div class="line">        System.out.println(<span class="string">"Constructor method-&gt;&gt;this.threadName:   "</span> + <span class="keyword">this</span>.getName());</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"**********************************************"</span>);</div><div class="line">        <span class="keyword">this</span>.lock = lock;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>.lock) &#123;</div><div class="line">            System.out.println(<span class="string">"Run method-&gt;&gt;CurrentThreadName:   "</span> + Thread.currentThread().getName());</div><div class="line">            System.out.println(<span class="string">"Run method-&gt;&gt;this.threadName:     "</span> + <span class="keyword">this</span>.getName());</div><div class="line"></div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                System.out.println(<span class="string">"MyThread1:"</span> + Thread.currentThread().getName() + <span class="string">" get the lock,and i will wait for some notify!"</span>);</div><div class="line">                <span class="keyword">long</span> statrTime = System.currentTimeMillis();</div><div class="line">                <span class="comment">//wait是让使用wait方法的对象等待，暂时先把对象锁给让出来，给其它持有该锁的对象用，其它对象用完后再告知（notify）等待的那个对象可以继续执行了</span></div><div class="line">                <span class="keyword">this</span>.lock.wait();</div><div class="line">                System.out.println(<span class="string">"MyThread1"</span> + Thread.currentThread().getName() + <span class="string">" wait end! lock time : "</span> + (System.currentTimeMillis() - statrTime) / <span class="number">1000</span>);</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                System.out.println(<span class="string">"wait be interrupted by interrupt method just now!"</span>);</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Object lock = <span class="keyword">new</span> Object();</div><div class="line">        MyThread1 myThread1 = <span class="keyword">new</span> MyThread1(lock);</div><div class="line">        MyThread1 myThread2 = <span class="keyword">new</span> MyThread1(lock);</div><div class="line">        myThread1.start();</div><div class="line">        myThread2.start();</div><div class="line">        <span class="comment">//wait和notify必须要写在同步代码块内部 否则会报java.lang.IllegalMonitorStateException异常</span></div><div class="line">        <span class="keyword">synchronized</span> (lock) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                Thread.sleep(<span class="number">3000</span>);</div><div class="line">                lock.notifyAll();</div><div class="line">                <span class="comment">//lock.wait();</span></div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> MyThread;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by yuhang on 2016/11/30.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread2</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">    Object lock = <span class="keyword">new</span> Object();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyThread2</span><span class="params">(Object lock)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.lock = lock;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">synchronized</span> (lock) &#123;</div><div class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">"will notify!"</span>);</div><div class="line">            <span class="comment">//notify不会马上释放锁，会等到当前同步代码块执行完，才会释放锁</span></div><div class="line">            lock.notify();</div><div class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">" notified ,but didn't release!"</span>);</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                Thread.sleep(<span class="number">1000</span>);</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">" after sleep,will release the lock!"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Object lock = <span class="keyword">new</span> Object();</div><div class="line">        MyThread1 myThread1 = <span class="keyword">new</span> MyThread1(lock);</div><div class="line">        myThread1.start();</div><div class="line">        <span class="comment">//测试Notify不释放锁</span></div><div class="line">        MyThread2 myThread2 = <span class="keyword">new</span> MyThread2(lock);</div><div class="line">        <span class="comment">//myThread2.start();</span></div><div class="line"></div><div class="line">        <span class="comment">//测试interrupt方法</span></div><div class="line"><span class="comment">//        try &#123;</span></div><div class="line"><span class="comment">//            Thread.sleep(10000);</span></div><div class="line"><span class="comment">//        &#125; catch (InterruptedException e) &#123;</span></div><div class="line"><span class="comment">//            e.printStackTrace();</span></div><div class="line"><span class="comment">//        &#125;</span></div><div class="line"><span class="comment">//        System.out.println(myThread1.getName() + "will execute interrupt method!");</span></div><div class="line"><span class="comment">//        myThread1.interrupt();</span></div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//join方法会释放锁,但是不加时间会一直阻塞当前执行的线程直到myThead1的run方法执行完成</span></div><div class="line">            myThread1.join();<span class="comment">//.join(1000);</span></div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//如果没有Join方法myThead2线程是不会启动的</span></div><div class="line">        myThread2.start();</div><div class="line">        System.out.println(<span class="string">"i will print after myThead1 complete!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1883,7 +1878,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1891,7 +1886,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1900,7 +1895,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1962,7 +1957,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

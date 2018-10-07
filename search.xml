@@ -4,6 +4,46 @@
   
     
     <entry>
+      <title><![CDATA[vert.x-初识Vert.x]]></title>
+      <url>http://yuhang.tech/2018/05/13/%E5%88%9D%E5%A7%8BVertx/</url>
+      <content type="html"><![CDATA[<h1 id="最好的文档"><a href="#最好的文档" class="headerlink" title="最好的文档"></a>最好的文档</h1><p>​    接触到Vert.x已经有两年了，从3.2到现在的3.5.3。平时经常看到有人在社区群或者网上提问怎么vert.x怎么入门，或者哪里有入门教程,其实Vert.x的<a href="https://vertx.io/docs/#explore" target="_blank" rel="external">官放文档</a>无论是界面的赏心悦目还是例子的覆盖程度，都算是比较清楚明了。无疑这是学习Vert.x最好的地方，如果你的英文很差可以选择社区翻译的<a href="https://vertxchina.github.io/vertx-translation-chinese/" target="_blank" rel="external">中文版本</a>。</p>
+<p><img src="https://ws4.sinaimg.cn/large/0069RVTdgy1fv4qm574elj31kw1037dd.jpg" alt="documents"></p>
+<h1 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h1><p>​    Eclipse <strong>Vert.x</strong> is a tool-kit for building <strong>reactive</strong> applications on the <strong>JVM</strong>.</p>
+<p>​    上面是官网对Vert.x的定位，首先定位是tool-kit而不是framework。框架总是给人笨重的感觉，vert.x的定位不是框架还是一个工具包。你可以拿它去写一个Web服务、TCP服务，也可以用它的异步htppClient去高效的完成网络请求，甚至你可以只用它去做一个定时任务。这就是工具的定位，取你想用的。</p>
+<p>​    第二关键字是reactive，vert.x的世界里到处都是异步代码，这意味着你的应用程序可以使用少量内核线程处理大量并发。</p>
+<p>​    第三个关键字是JVM，你可以用任何jvm语言来完成你的程序，比如<strong>Java</strong>, <strong>Groovy</strong>, <strong>Ruby</strong>, <strong>Ceylon</strong>, <strong>Scala</strong> 和 <strong>Kotlin</strong>，不同于以前的多语言只是简单的互相调用，依托于eventbus(后面会讲解)，甚至可以一个语言完成一个“服务”。</p>
+<h2 id="Hello-Vert-x"><a href="#Hello-Vert-x" class="headerlink" title="Hello Vert.x"></a>Hello Vert.x</h2><p>​    上面说了一些vert.x的关键字，可能看起来比较抽象，下面我们开始用代码感受vert.x带来的异步编程的趣味。这个系列的文章示例代码都在这个<a href="https://github.com/yh3434/tutorial" target="_blank" rel="external">链接</a>里。</p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><ol>
+<li><p>拉取示例工程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/yh3434/vertx-turtorial.git</div></pre></td></tr></table></figure>
+</li>
+<li><p>打包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn clean package -DskipTests=true</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动工程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd vertx-hello/target</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar vertx-shade.jar</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>此时打开浏览器分别输入：</p>
+<ul>
+<li><a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a></li>
+<li><a href="http://localhost:8081" target="_blank" rel="external">http://localhost:8081</a></li>
+</ul>
+<p>可以看到两个hello vert.x。下面我们来分析下怎么实现这两个个Hello的。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>我们打开github上的代码看下实现。</p>
+<ol>
+<li><p>打开vertx-hello模块，可以看到工程如下：</p>
+<p><img src="https://ws1.sinaimg.cn/large/0069RVTdgy1fv5qz2wtn6j31kw0kd12f.jpg" alt="vertx-hello"></p>
+</li>
+<li><p>如果你之前没有写过“fluent”或者异步代码，可以直观的感受到和之前同步的代码有些区别。</p>
+</li>
+</ol>
+<p>恭喜你到这里你就用java和kotlin两种语言监听了8080和8081两个端口，并开启了web服务！后面的文章我会详细介绍vert.x的异步思想和线程模型等知识，并搭建一个微服务工程。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[jvm-垃圾回收图谱]]></title>
       <url>http://yuhang.tech/2017/07/13/jvm-JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%9B%BE%E8%B0%B1/</url>
       <content type="html"><![CDATA[<p>总结图一张：</p>
